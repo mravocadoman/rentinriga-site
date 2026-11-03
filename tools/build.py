@@ -115,6 +115,7 @@ def page(path, title, description, body, extra_head=''):
           <p class="foot-h">Guides</p>
           <ul>
             <li><a href="/areas/">Riga neighbourhoods</a></li>
+            <li><a href="/how-to-rent-in-riga/">How to rent in Riga</a></li>
             <li><a href="/riga-rent-prices/">Rent prices in Riga</a></li>
             <li><a href="/#costs">Move-in cost calculator</a></li>
           </ul>
@@ -337,10 +338,94 @@ def prices_page():
 
 
 def sitemap():
-    urls = ['', 'ru/', 'riga-rent-prices/', 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/', 'ru/privacy/']
+    urls = ['', 'ru/', 'how-to-rent-in-riga/', 'riga-rent-prices/', 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/', 'ru/privacy/']
     today = date.today().isoformat()
     body = ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls)
     (ROOT / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n', encoding='utf-8')
+
+
+def how_to_rent():
+    avg = CITY_AVG
+    glossary = [
+        ('dzīvoklis', 'flat'),
+        ('istaba', 'room. Listings count every room, so “2 istabas” is a living room and one bedroom'),
+        ('izīrē', 'for rent (the section to look in on listing sites)'),
+        ('īres maksa', 'monthly rent'),
+        ('komunālie maksājumi', 'utilities'),
+        ('apsaimniekošanas maksa', 'building management fee'),
+        ('drošības nauda', 'security deposit'),
+        ('mēbelēts', 'furnished'),
+        ('stāvs', 'floor'),
+        ('īres līgums', 'lease'),
+        ('bez starpniekiem', 'no agents involved, so usually no agency fee'),
+        ('deklarēt dzīvesvietu', 'declare your place of residence'),
+    ]
+    gl = ''.join(f'<dt lang="lv">{escape(lv)}</dt><dd>{escape(en)}</dd>' for lv, en in glossary)
+    article = ld({'@context': 'https://schema.org', '@type': 'Article',
+                  'headline': 'How to rent a flat in Riga as a foreigner (2026)',
+                  'datePublished': DATA['updated'], 'dateModified': DATA['updated'], 'inLanguage': 'en',
+                  'author': {'@type': 'Organization', 'name': 'Rent in Riga Latvia', 'url': SITE + '/'},
+                  'publisher': {'@type': 'Organization', 'name': 'Rent in Riga Latvia', 'url': SITE + '/'},
+                  'mainEntityOfPage': f'{SITE}/how-to-rent-in-riga/'})
+    body = f"""    <section class="hero guide-hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>How to rent in Riga</span></nav>
+        <p class="eyebrow">Step-by-step guide</p>
+        <h1>How to rent a flat in Riga as a foreigner</h1>
+        <p class="lead">Six steps from setting a budget to getting your keys, with the costs, the Latvian words you’ll meet in listings, and the rules that protect you. Updated for 2026.</p>
+        <div class="guide-actions">
+          <a class="btn btn-primary" href="/#request">Skip the search: get offers {ARROW}</a>
+          <a class="btn btn-ghost" href="/#match">Find my neighbourhood</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <article class="wrap prose how-to">
+        <h2>1. Set a realistic budget</h2>
+        <p>Across Riga listings from March to October 2026, the average asking rent was <b>{eur(avg[0])}</b> a month for a 1-room flat (studio), <b>{eur(avg[1])}</b> for a 2-room flat (one bedroom) and <b>{eur(avg[2])}</b> for a 3-room flat (two bedrooms), before utilities. Central areas cost more. See <a href="/riga-rent-prices/">rent prices by neighbourhood</a>.</p>
+        <p>Plan for more than the rent when you sign:</p>
+        <ul>
+          <li><b>Deposit:</b> usually one month’s rent. Latvia’s Residential Tenancy Law caps it at two months.</li>
+          <li><b>Agency fee:</b> commonly 50% of one month’s rent on agency listings. Flats rented straight from the owner often have none.</li>
+          <li><b>Utilities:</b> heating, water, waste, the building management fee and electricity are usually paid on top. Heating is the big one in winter, and it costs far more in an un-insulated building.</li>
+        </ul>
+        <p>The <a href="/#costs">move-in cost calculator</a> adds it up for your rent.</p>
+
+        <h2>2. Choose where to live</h2>
+        <p>Think about your commute first, then what you want around you: cafés and walkability in the centre, parks and quiet in areas like Teika or Mežaparks, or lower rents in large estates like Purvciems and Imanta. The <a href="/#match">neighbourhood matcher</a> scores all eleven areas on your budget, workplace and priorities, and each has its own <a href="/areas/">neighbourhood guide</a>.</p>
+
+        <h2>3. Read Latvian listings</h2>
+        <p>Many listings are in Latvian or Russian. These words come up all the time:</p>
+        <dl class="glossary">{gl}</dl>
+
+        <h2>4. View the flat safely</h2>
+        <p>Never pay a deposit or reservation fee for a flat you haven’t seen in person or on a live video call where someone walks through it. A known scam aimed at newcomers is a fake listing with copied photos that asks for money up front. At the viewing:</p>
+        <ul>
+          <li>Ask for last winter’s utility bills, not just the summer ones.</li>
+          <li>Check the windows, the water pressure, the heating and where the internet comes from.</li>
+          <li>Ask who owns the flat. A real owner or agent can show it; ownership can be checked in the Land Register (zemesgramata.lv).</li>
+          <li>Take photos of everything, including existing damage, before you move in.</li>
+        </ul>
+
+        <h2>5. Sign a proper lease</h2>
+        <p>Under the Residential Tenancy Law (in force since 2021), a lease has to be in writing and for a fixed term. It should state the rent and how and when it can change, the deposit, who pays which bills, and an inventory of the furniture. Tenants can usually end a lease with one month’s written notice. Registering the lease in the Land Register is optional, but an unregistered lease can end when a new owner registers the flat, so ask about it for a long stay. The landlord has to return any unused part of the deposit when you move out, unless the contract says otherwise. Read the law itself at <a href="https://likumi.lv/ta/id/322216" rel="noopener" target="_blank">likumi.lv</a>.</p>
+
+        <h2>6. Move in and register</h2>
+        <p>If you live in Latvia on a residence permit or an EU registration certificate, declare your place of residence within one month of moving in. You can do it online at latvija.gov.lv, and your lease is the legal basis for the address. EU citizens staying longer than three months also need a registration certificate from the Office of Citizenship and Migration Affairs. Check the current rules at <a href="https://www.pmlp.gov.lv/en/declaration-residence-place" rel="noopener" target="_blank">pmlp.gov.lv</a>.</p>
+
+        <div class="how-cta">
+          <h2>Rather not do all of this alone?</h2>
+          <p>Tell us your dates, budget and areas in about two minutes. We pass your request to up to three rental agencies, who reply with flats that fit. It’s free for you.</p>
+          <a class="btn btn-primary" href="/#request">Get flat offers {ARROW}</a>
+        </div>
+      </article>
+    </section>
+"""
+    page('how-to-rent-in-riga', 'How to rent a flat in Riga as a foreigner (2026 guide) | Rent in Riga',
+         f'Renting in Riga step by step: average rents ({eur(avg[1])} for a 1-bedroom), deposit and agency fees, Latvian listing words, avoiding scams, the lease and registering your address.',
+         body, article)
 
 
 def translate(src, table, what):
@@ -429,6 +514,7 @@ if __name__ == '__main__':
         area_page(a)
     areas_index()
     prices_page()
+    how_to_rent()
     russian()
     sitemap()
     print(f'built {len(AREAS)} area guides, areas index, rent prices page, sitemap, assets/areas.js')

@@ -396,3 +396,14 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 .lead-sample p:last-child { margin: 0; }
 .nav-links .lang-switch { font-weight: 800; color: var(--ink); border: 1.5px solid var(--line); border-radius: 8px; padding: 4px 8px; }
 @media (max-width: 920px) { .nav-links .lang-switch { display: inline-block; border: 0; padding: 12px 0; } }
+
+/* ---------- How-to guide ---------- */
+.how-to h2 { margin-top: 1.6em; }
+.how-to h2:first-child { margin-top: 0; }
+.how-to p, .how-to li { font-size: 1.05rem; }
+.glossary { display: grid; grid-template-columns: max-content 1fr; gap: 10px 22px; margin: 0 0 1em; padding: 20px 22px; background: var(--surface); border-radius: var(--radius); }
+.glossary dt { font-weight: 800; }
+.glossary dd { margin: 0; color: var(--ink-2); }
+@media (max-width: 560px) { .glossary { grid-template-columns: 1fr; gap: 2px; } .glossary dd { margin-bottom: 10px; } }
+.how-cta { margin-top: 2.4em; padding: 28px; border-radius: 20px; background: var(--primary-soft); }
+.how-cta h2 { margin-top: 0; }
