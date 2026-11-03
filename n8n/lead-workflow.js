@@ -91,6 +91,37 @@ if (kind === 'tenant') {
   alert = '🤝 New partner application' + NL + (company || '-') + ' | ' + name + NL + [phone, email].filter(Boolean).join(' | ');
 }
 
+// Confirmation e-mail to the tenant. Fixed text plus validated fields only (never the name or the
+// notes), so the form can't be used to send someone else arbitrary text; at most one per address
+// per 24 h, remembered as a hash, not the address.
+let confirm = { send: false };
+if (kind === 'tenant') {
+  const store = $getWorkflowStaticData('global');
+  store.confirmed = store.confirmed || {};
+  const now = Date.now();
+  for (const k of Object.keys(store.confirmed)) if (now - store.confirmed[k] > 864e5) delete store.confirmed[k];
+  let h = 2166136261;
+  for (const c of email.toLowerCase()) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  const hk = h.toString(36);
+  if (!store.confirmed[hk]) {
+    store.confirmed[hk] = now;
+    const RU = lang === 'ru';
+    const AREA_RU = { 'Centre': 'Центр', 'Old Town': 'Старая Рига', 'Ķīpsala': 'Кипсала', 'Skanste': 'Скансте', 'Teika': 'Тейка', 'Āgenskalns': 'Агенскалнс', 'Torņakalns': 'Торнякалнс', 'Avoti & Grīziņkalns': 'Авоты и Гризинькалнс', 'Mežaparks': 'Межапаркс', 'Purvciems': 'Пурвциемс', 'Imanta': 'Иманта' };
+    const picked = (Array.isArray(body.areas) ? body.areas : []).filter((x) => x in AREA_RU).map((x) => (RU ? AREA_RU[x] : x));
+    const STAY = RU ? { '1-3': '1–3 месяца', '3-6': '3–6 месяцев', '6-12': '6–12 месяцев', '12+': '12+ месяцев' } : { '1-3': '1–3 months', '3-6': '3–6 months', '6-12': '6–12 months', '12+': '12+ months' };
+    const ROOMS = RU ? { '1': '1 комната (студия)', '2': '2 комнаты', '3': '3 комнаты', '4+': '4+ комнаты' } : { '1': '1 room (studio)', '2': '2 rooms', '3': '3 rooms', '4+': '4+ rooms' };
+    const facts = [
+      moveInLv && (RU ? 'Заезд: ' : 'Move-in: ') + moveInLv + (STAY[stay] ? ' (' + STAY[stay] + ')' : ''),
+      ROOMS[rooms] && (RU ? 'Квартира: ' : 'Flat: ') + ROOMS[rooms] + (budget ? (RU ? ', до ' + budget + ' EUR в месяц' : ', up to EUR ' + budget + ' a month') : ''),
+      (RU ? 'Районы: ' : 'Areas: ') + (picked.length ? picked.join(', ') : (RU ? 'любые' : 'any')),
+    ].filter(Boolean).join(NL);
+    const text = RU
+      ? ['Здравствуйте!', '', 'Спасибо за заявку на Rent in Riga. Вот что мы получили:', '', facts, '', 'Что будет дальше', '1. Мы проверяем заявку, обычно в течение одного рабочего дня.', '2. До трёх агентств связываются с вами удобным для вас способом.', '3. Вы сравниваете квартиры, договариваетесь о просмотрах и выбираете. Без обязательств.', '', 'Совет: никогда не платите депозит или бронь, пока не увидели квартиру лично или по видеосвязи.', '', 'Что-то не так или планы изменились? Просто ответьте на это письмо.', '', 'Rent in Riga', 'https://rentinrigalatvia.lv/ru/'].join(NL)
+      : ['Hi,', '', 'Thanks for your request on Rent in Riga. This is what we received:', '', facts, '', 'What happens next', '1. We check your request, usually within one working day.', '2. Up to three rental agencies contact you by your preferred channel.', '3. You compare flats, book viewings and choose. There is no obligation.', '', 'A tip while you wait: never pay a deposit or reservation fee before you have seen the flat in person or on a live video call.', '', 'Something wrong, or plans changed? Just reply to this e-mail.', '', 'Rent in Riga', 'https://rentinrigalatvia.lv/'].join(NL);
+    confirm = { send: true, to: email, subject: RU ? 'Мы получили вашу заявку на квартиру в Риге' : 'We’ve got your Riga flat request', text };
+  }
+}
+
 // Telegram gets parse_mode HTML, so user text is escaped (Markdown would eat [RU] or choke on _ and *).
 alert = alert.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -101,7 +132,7 @@ return [{ json: {
     areas, wants, company: kind === 'partner' ? [company, website, units && units + ' flats'].filter(Boolean).join(' | ') : company,
     message, source: (lang === 'ru' ? '[ru] ' : '') + source, page, consent_at: new Date().toISOString(), status: 'new', sent_to: '', raw: JSON.stringify(body).slice(0, 8000),
   },
-  email, subject, detail, alert,
+  email, subject, detail, alert, confirm,
   cors: ORIGINS.includes(origin) ? origin : ORIGINS[0],
 } }];`,
     },
@@ -224,10 +255,45 @@ const ping = node({
   },
 });
 
+const wantsConfirm = node({
+  type: 'n8n-nodes-base.if',
+  version: 2.2,
+  config: {
+    name: 'Confirmation due?',
+    parameters: {
+      conditions: {
+        options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' },
+        conditions: [{ leftValue: expr("{{ $('Parse and gate').item.json.confirm.send }}"), rightValue: '', operator: { type: 'boolean', operation: 'true', singleValue: true } }],
+        combinator: 'and',
+      },
+    },
+  },
+});
+
+const confirmMail = node({
+  type: 'n8n-nodes-base.gmail',
+  version: 2.1,
+  config: {
+    name: 'Confirmation to tenant',
+    onError: 'continueRegularOutput',
+    parameters: {
+      resource: 'message',
+      operation: 'send',
+      sendTo: expr("{{ $('Parse and gate').item.json.confirm.to }}"),
+      subject: expr("{{ $('Parse and gate').item.json.confirm.subject }}"),
+      emailType: 'text',
+      message: expr("{{ $('Parse and gate').item.json.confirm.text }}"),
+      options: { appendAttribution: false, senderName: 'Rent in Riga' },
+    },
+    credentials: { gmailOAuth2: { id: 'OxLeeAoOPOzsUtpV', name: 'Rihards personal | Gmail account' } },
+  },
+});
+
 export default workflow('rentinriga-lead', 'Rent in Riga — leads', { settings: { executionOrder: 'v1', errorWorkflow: 'R9OmXjBXdhYetZkM' } })
   .add(hook)
   .to(gate)
   .to(save)
   .to(reply)
   .to(mail)
-  .to(ping);
+  .to(ping)
+  .to(wantsConfirm.onTrue(confirmMail));

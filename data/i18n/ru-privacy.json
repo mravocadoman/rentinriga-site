@@ -23,8 +23,6 @@
   "Why we use it, and on what legal basis": "Зачем мы их используем и на каком основании",
   "To pass your request to up to three partner rental agencies": "Чтобы передать вашу заявку максимум трём агентствам-партнёрам,",
   "so they can contact you with offers. The legal basis is your consent (GDPR Art. 6(1)(a)), which you give with the checkbox on the form.": "чтобы они связались с вами с предложениями. Основание — ваше согласие (GDPR, ст. 6(1)(a)), которое вы даёте отметкой в форме.",
-  "To reply to you and handle your request or application.": "Чтобы ответить вам и обработать заявку.",
-  "The legal basis is taking steps at your request (Art. 6(1)(b)).": "Основание — действия по вашему запросу (ст. 6(1)(b)).",
   "To prevent spam and abuse, and to see which channels bring requests.": "Чтобы защищаться от спама и злоупотреблений и понимать, какие каналы приводят заявки.",
   "The legal basis is our legitimate interest (Art. 6(1)(f)).": "Основание — наш законный интерес (ст. 6(1)(f)).",
   "Who receives it": "Кто получает данные",
@@ -45,5 +43,7 @@
   "dvi.gov.lv": "dvi.gov.lv",
   "Home": "Главная",
   "For rental agencies": "Для агентств (англ.)",
-  "Rent in Riga Latvia": "Rent in Riga Latvia"
+  "Rent in Riga Latvia": "Rent in Riga Latvia",
+  "To reply to you and handle your request or application,": "Чтобы ответить вам и обработать заявку,",
+  "including one automatic e-mail confirming a rental request. The legal basis is taking steps at your request (Art. 6(1)(b)).": "включая одно автоматическое письмо с подтверждением заявки на аренду. Основание — действия по вашему запросу (ст. 6(1)(b))."
 }
