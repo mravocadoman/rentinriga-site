@@ -1,0 +1,10 @@
+# Replaces the old WordPress rules (WordPress moved out of public_html on 2026-11-03).
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+# One canonical host.
+RewriteCond %{HTTP_HOST} ^www\.rentinrigalatvia\.lv$ [NC]
+RewriteRule ^(.*)$ https://rentinrigalatvia.lv/$1 [R=301,L]
+# Old WordPress endpoints that bots and old links still ask for.
+RewriteRule ^(feed|wp-json|wp-admin|wp-content|wp-includes)(/.*)?$ - [G,L]
+RewriteRule ^(wp-login\.php|xmlrpc\.php|wp-sitemap.*\.xml)$ - [G,L]
