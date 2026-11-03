@@ -37,6 +37,6 @@ Step 3 *Contact*: name, e-mail, phone/WhatsApp, preferred channel, "my employer 
 A live "typical rent for what you picked" hint warns early when the budget is below market. The draft is kept in localStorage so a reload loses nothing. UTM/gclid/referrer and the landing page are captured. Honeypot + minimum fill time.
 
 ## Open (owner)
-- Go-live: deploying replaces the WordPress homepage. Needs the SiteGround SSH user/host for this site + GitHub repo secrets.
+- ~~Go-live~~: live since 2026-11-03 (deploy on push to main).
 - Legal entity for the privacy notice (currently Rihards Zeila as controller).
 - Partner agencies to route leads to.

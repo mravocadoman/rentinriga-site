@@ -55,4 +55,4 @@ Push to `main`, and GitHub Actions (`.github/workflows/deploy.yml`) does the res
 
 `index.html` takes precedence over WordPress's `index.php`.
 
-The workflow needs the repo secrets `SG_SSH_KEY`, `SG_HOST` and `SG_USER` for the SiteGround site that hosts rentinrigalatvia.lv. New top-level files or folders have to be added to the rsync list.
+The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG_USER` (`u1891-1ebmevm4ybzb`). The deploy key lives at `~/.ssh/rentinriga_siteground` on Rihards' Mac and is imported as "Github deploy" in Site Tools → Devs → SSH Keys Manager for this site. New top-level files or folders have to be added to the rsync list.
