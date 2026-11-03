@@ -91,3 +91,10 @@ The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG
 ## Search Console
 
 URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day; it reads Success, with 18 pages discovered. Indexing was requested for `/`, `/riga-rent-prices/`, `/ru/` and `/how-to-rent-in-riga/`. The build regenerates `sitemap.xml`; a page added outside the build has to be added to `urls` in `tools/build.py`.
+
+## Analytics
+
+Cloudflare Web Analytics, which is cookieless and needs no consent banner, runs under the Cloudflare account rihards@marketingaskola.lv: Analytics → Web analytics → rentinrigalatvia.lv.
+- The beacon snippet (site token `a43d3f88…`, public by design) sits before `</body>` in every hand-written page and in the `page()` template in `tools/build.py`, so the generated and Russian pages carry it too.
+- A new hand-written page needs the snippet added by hand.
+- Lead sources are recorded separately on each lead (UTM, gclid, referrer).
