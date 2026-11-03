@@ -168,6 +168,9 @@
   // City-wide asking rent (vericity.ai median of ~2,175 listings, 2 Nov 2026) for when no area is picked.
   // ponytail: no reliable city-wide typical 4+ room figure, so the hint stays quiet for that size.
   const CITY = [340, 590, 850, null];
+  // City-wide averages from the same viszinis.lv dataset and period, so "vs Riga average" compares like with like.
+  const CITY_AVG = [336, 489, 709, null];
+  const MAX_RENT = [0, 1, 2, 3].map((i) => Math.max(...AREAS.map((a) => a.rent[i] || 0)));
   const ROOM_INDEX = { 1: 0, 2: 1, 3: 2, '4+': 3 };
   const ROOM_LABEL = ['1-room (studio)', '2-room (1 bed)', '3-room (2 beds)', '4+ room (3+ beds)'];
 
@@ -189,16 +192,19 @@
       <h3>${a.name}</h3>
       ${a.lv !== a.name ? `<p class="small muted" lang="lv">${a.lv}</p>` : ''}
       <p class="tagline">${a.tagline}</p>
-      <table class="rent-table"><caption class="visually-hidden">Average asking rent in ${a.name}</caption>
-        <tbody>${a.rent.map((r, i) => `<tr><th scope="row">${ROOM_LABEL[i]}</th><td>${r ? eur(r) : 'too few listings'}</td></tr>`).join('')}</tbody>
-      </table>
+      <ul class="rent-bars" aria-label="Average asking rent in ${a.name}">${a.rent.map((r, i) => {
+        if (!r) return `<li><div class="row"><span>${ROOM_LABEL[i]}</span><span class="muted">too few listings</span></div></li>`;
+        const d = CITY_AVG[i] ? Math.round((r / CITY_AVG[i] - 1) * 100) : null;
+        const vs = d === null || d === 0 ? '' : `<span class="vs ${d > 0 ? 'up' : 'down'}" title="vs Riga average">${d > 0 ? '+' : '−'}${Math.abs(d)}%</span>`;
+        return `<li><div class="row"><span>${ROOM_LABEL[i]}</span><span><b>${eur(r)}</b>${vs}</span></div><div class="bar"><i style="width:${Math.round((r / MAX_RENT[i]) * 100)}%"></i></div></li>`;
+      }).join('')}</ul>
       <ul class="facts">
         <li><b>What it’s like:</b> ${a.feel}</li>
         <li><b>Getting around:</b> ${a.move}</li>
         <li><b>Good for:</b> ${a.good}</li>
       </ul>
       <button type="button" class="btn ${picked ? 'btn-ghost' : 'btn-primary'}" data-pick="${a.id}">${picked ? '✓ In my request (remove)' : 'Add to my request'}</button>
-      <p class="source-note">Average monthly asking rent, excl. utilities, from listings between March and October 2026 (viszinis.lv). Signed rents can be lower. A 1-room flat in newer areas such as Skanste is often larger.</p>`;
+      <p class="source-note">Average monthly asking rent, excl. utilities, from listings between March and October 2026 (viszinis.lv). The % compares with the Riga-wide average from the same data, and bars are scaled to the priciest area. Signed rents can be lower, and a 1-room flat in newer areas such as Skanste is often larger.</p>`;
   }
 
   function selectArea(id, { pan = true } = {}) {
@@ -251,6 +257,19 @@
   initMap();
 
   /* ---------- Move-in cost calculator ---------- */
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countTo(el, to) {
+    const from = Number(el.dataset.v || to);
+    el.dataset.v = to;
+    if (calm || from === to) { el.textContent = eur(to); return; }
+    const t0 = performance.now();
+    const tick = (t) => {
+      const k = Math.min(1, (t - t0) / 350);
+      el.textContent = eur(from + (to - from) * (1 - (1 - k) ** 3));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
   // Heating in the coldest months, scaled by floor area from Rīgas siltums' published example
   // for a 45 m² flat (insulated ≈ €46–57, not insulated ≈ €116–142 a month in Dec–Jan, excl. VAT).
   const HEAT = { small: [45, 145], mid: [70, 220], large: [100, 315] };
@@ -266,7 +285,7 @@
     $('#calc-first').textContent = eur(rent);
     $('#calc-dep').textContent = eur(dep);
     $('#calc-fee').textContent = eur(fee);
-    $('#calc-total').textContent = eur(rent + dep + fee);
+    countTo($('#calc-total'), rent + dep + fee);
     $('#calc-rent2').textContent = eur(rent);
     $('#calc-heat').textContent = `${eur(h1)}–${eur(h2)}`;
   }

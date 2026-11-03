@@ -44,6 +44,7 @@
 
   <main>
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div>
           <p class="eyebrow">Relocating to Riga, Latvia</p>
@@ -71,7 +72,7 @@
                 <option value="2500">€1,600+</option>
               </select>
             </label>
-            <button class="btn btn-primary" type="submit">Start my request</button>
+            <button class="btn btn-primary" type="submit">Start my request <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </form>
           <ul class="trust">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free for tenants</li>
@@ -79,10 +80,30 @@
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No obligation to accept anything</li>
           </ul>
         </div>
+        <div class="hero-visual">
         <figure class="hero-photo">
           <img src="/assets/img/hero.webp" srcset="/assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" sizes="(max-width: 960px) 100vw, 46vw" width="1600" height="1067" alt="A bright furnished one-bedroom flat with tall windows, a sofa and a work desk">
           <figcaption>Illustrative photo</figcaption>
         </figure>
+        <div class="float-card" aria-hidden="true">
+          <p class="fc-label">Example request</p>
+          <p class="fc-title">2-room flat in Teika</p>
+          <p class="fc-meta">From 1 February · 6–12 months · up to €700</p>
+          <ol class="fc-steps">
+            <li class="done">Request checked</li>
+            <li class="done">Sent to 3 agencies</li>
+            <li class="now">Offers on the way</li>
+          </ol>
+        </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <ul class="stats">
+          <li><strong>2 min</strong><span>to fill in your request</span></li>
+          <li><strong>Up to 3</strong><span>agencies work on it</span></li>
+          <li><strong>11</strong><span>Riga neighbourhoods mapped</span></li>
+          <li><strong>€0</strong><span>our fee for tenants</span></li>
+        </ul>
       </div>
     </section>
 
@@ -94,10 +115,30 @@
           <p class="lead">Riga’s listings are spread across Latvian- and Russian-language sites, and the good flats go quickly. We hand your brief to agents who do this every day.</p>
         </div>
         <ol class="steps">
-          <li class="reveal"><h3>Tell us what you need</h3><p>Dates, length of stay, budget, rooms and the areas you like. About two minutes.</p></li>
-          <li class="reveal"><h3>Agencies pick it up</h3><p>We check your request and send it to up to three rental agencies that cover your areas and budget.</p></li>
-          <li class="reveal"><h3>Compare offers, then choose</h3><p>Agents reach you by e-mail or WhatsApp with matching flats and viewing times, in person or by video call.</p></li>
+          <li class="reveal"><span class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="step-n">Step 1</span><h3>Tell us what you need</h3><p>Dates, length of stay, budget, rooms and the areas you like. About two minutes.</p></li>
+          <li class="reveal"><span class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><span class="step-n">Step 2</span><h3>Agencies pick it up</h3><p>We check your request and send it to up to three rental agencies that cover your areas and budget.</p></li>
+          <li class="reveal"><span class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14.5 8.5l2 2"/></svg></span><span class="step-n">Step 3</span><h3>Compare offers, then choose</h3><p>Agents reach you by e-mail or WhatsApp with matching flats and viewing times, in person or by video call.</p></li>
         </ol>
+      </div>
+    </section>
+
+    <section class="compare" id="why">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Why use us</p>
+          <h2>Searching alone vs. with Rent in Riga</h2>
+        </div>
+        <div class="compare-grid">
+          <div class="compare-col reveal">
+            <h3>On your own</h3>
+            <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Listings spread across Latvian- and Russian-language sites</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Calling and messaging landlords one by one</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Hard to tell a real offer from a scam</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Working out deposits, fees and utilities yourself</span></li></ul>
+          </div>
+          <div class="compare-col us reveal">
+            <h3>With Rent in Riga</h3>
+            <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>One request in English, in about two minutes</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Up to three agencies search for you</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Partners agree to take no money before a viewing</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Fees and expected utility costs stated before you view</span></li></ul>
+            <a class="btn btn-primary" href="#request">Get flat offers <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -344,6 +385,15 @@
           <details><summary>What should the lease include?</summary><p>Under Latvia’s Residential Tenancy Law (2021), a lease must be in writing and fixed-term. It should state the rent, how and when the rent can change, the deposit, who pays which bills, and an inventory of the furniture. Tenants can usually end the lease with one month’s written notice. Read the full law at <a href="https://likumi.lv/ta/id/322216" rel="noopener" target="_blank">likumi.lv</a>.</p></details>
           <details><summary>Is Rent in Riga a landlord or an agency?</summary><p>Neither. We’re a free matching service. We don’t own or list flats. We send your request to independent rental agencies, and you sign the lease with them or with the owner.</p></details>
         </div>
+      </div>
+    </section>
+    <section class="cta-band">
+      <div class="wrap cta-inner">
+        <div>
+          <h2>Moving to Riga soon?</h2>
+          <p>Send one request and let agents who know the city do the searching. It takes about two minutes.</p>
+        </div>
+        <a class="btn btn-primary btn-light" href="#request">Get flat offers <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </section>
   </main>
