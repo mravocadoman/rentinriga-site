@@ -37,7 +37,7 @@ jobs:
           SG_USER: ${{ secrets.SG_USER }}
         run: |
           rsync -rvz --checksum -e "ssh -p 18765 -i $HOME/.ssh/deploy_key -o BatchMode=yes" \
-            index.html 404.html .htaccess googlec3673720e3b0e240.html styles.css main.js favicon.svg robots.txt sitemap.xml assets partners privacy areas riga-rent-prices \
+            index.html 404.html .htaccess googlec3673720e3b0e240.html styles.css main.js favicon.svg apple-touch-icon.png robots.txt sitemap.xml assets partners privacy areas riga-rent-prices \
             "$SG_USER@$SG_HOST:www/rentinrigalatvia.lv/public_html/"
 
       - name: Flush SiteGround cache

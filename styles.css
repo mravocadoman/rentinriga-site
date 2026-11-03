@@ -387,3 +387,10 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 .price-table tbody th a:hover { color: var(--primary); }
 .price-table tbody tr:hover { background: var(--surface); }
 .price-table tfoot th, .price-table tfoot td { font-weight: 800; border-bottom: 0; background: var(--primary-soft); }
+
+/* ---------- Partner page example lead ---------- */
+.lead-sample { margin-top: 24px; max-width: 560px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); }
+.lead-sample dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 4px 0 12px; font-size: .95rem; }
+.lead-sample dt { color: var(--ink-2); font-weight: 600; }
+.lead-sample dd { margin: 0; font-weight: 600; }
+.lead-sample p:last-child { margin: 0; }
