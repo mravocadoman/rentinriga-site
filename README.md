@@ -60,3 +60,7 @@ Push to `main`, and GitHub Actions (`.github/workflows/deploy.yml`) does the res
 The old WordPress files were moved to `~/removed-from-public/2026-11-03-wordpress/` on the server (with its original `.htaccess`); nothing was deleted, and its database still exists. Our `.htaccess` serves `404.html`, redirects `www.` to the bare domain and answers 410 for old WordPress endpoints (`/feed/`, `/wp-json/`, `wp-login.php`, …), so search engines drop them.
 
 The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG_USER` (`u1891-1ebmevm4ybzb`). The deploy key lives at `~/.ssh/rentinriga_siteground` on Rihards' Mac and is imported as "Github deploy" in Site Tools → Devs → SSH Keys Manager for this site. New top-level files or folders have to be added to the rsync list.
+
+## Search Console
+
+URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day, and indexing of the homepage was requested so Google replaces the old WordPress version. After adding a page, add it to `sitemap.xml`.
