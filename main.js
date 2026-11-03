@@ -43,7 +43,7 @@
       entries.forEach((en) => (en.isIntersecting ? forms.add(en.target) : forms.delete(en.target)));
       document.body.classList.toggle('form-in-view', forms.size > 0);
     });
-    $$('#wizard, #quick, #calc').forEach((el) => fo.observe(el));
+    $$('#wizard, #quick, #calc, #matcher').forEach((el) => fo.observe(el));
   }
 
   /* ---------- Where the visitor came from (first touch, kept for the visit) ---------- */
@@ -253,8 +253,28 @@
     selectArea(current.id, { pan: false });
   }
   selectArea(current.id, { pan: false });
-  // Leaflet is a deferred script before this one, so it has run by now if it loaded at all.
-  initMap();
+  // Leaflet (~150 KB) loads only when the map comes near the screen, so it never slows the first paint.
+  function loadMap() {
+    const LEAFLET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min';
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = LEAFLET + '.css';
+    css.onload = () => map && map.invalidateSize();
+    document.head.append(css);
+    const js = document.createElement('script');
+    js.src = LEAFLET + '.js';
+    js.onload = initMap;
+    js.onerror = initMap; // CDN blocked: initMap hides the map and the cards still work
+    document.head.append(js);
+  }
+  if ('IntersectionObserver' in window) {
+    const mo = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) { mo.disconnect(); loadMap(); }
+    }, { rootMargin: '600px 0px' });
+    mo.observe($('#map'));
+  } else {
+    loadMap();
+  }
 
   /* ---------- Move-in cost calculator ---------- */
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -476,6 +496,99 @@
       say('Sorry, that didn’t go through. Your answers are saved, so please try again in a moment, or e-mail rihards.zeila@gmail.com.', 'error');
     } finally {
       submit.disabled = false;
+    }
+  });
+
+  /* ---------- Neighbourhood matcher ---------- */
+  // Tags mirror what each area card already says; "value" is computed from the rent data instead.
+  const TAGS = {
+    centre: ['walk', 'cafes'], 'old-town': ['walk', 'character', 'cafes'], kipsala: ['quiet', 'character', 'new'],
+    skanste: ['new'], teika: ['quiet', 'green'], agenskalns: ['character', 'cafes'], tornakalns: ['green', 'new'],
+    avoti: ['walk', 'cafes'], mezaparks: ['quiet', 'green'], purvciems: [], imanta: ['quiet', 'green'],
+  };
+  const WORK = {
+    centre: { at: [56.9520, 24.1130], label: 'the centre' }, skanste: { at: [56.9690, 24.1240], label: 'Skanste' },
+    teika: { at: [56.9725, 24.1650], label: 'Teika / VEF' }, left: { at: [56.9470, 24.0850], label: 'the left bank' },
+  };
+  const VIBE = { walk: 'walkable', quiet: 'quiet', green: 'green', new: 'modern buildings', character: 'historic character', cafes: 'cafés & nightlife', value: 'below-average rent' };
+  const km = ([a1, o1], [a2, o2]) => {
+    const r = Math.PI / 180;
+    const h = Math.sin((a2 - a1) * r / 2) ** 2 + Math.cos(a1 * r) * Math.cos(a2 * r) * Math.sin((o2 - o1) * r / 2) ** 2;
+    return 12742 * Math.asin(Math.sqrt(h));
+  };
+  const matcher = $('#matcher');
+  const results = $('#match-results');
+  const mBudget = matcher.elements.m_budget;
+  const mOut = $('#m-budget-out');
+  const showMBudget = () => { mOut.textContent = Number(mBudget.value) >= Number(mBudget.max) ? eur(mBudget.value) + '+' : eur(mBudget.value); };
+  mBudget.addEventListener('input', showMBudget);
+  showMBudget();
+  matcher.addEventListener('change', (e) => {
+    if (e.target.name !== 'vibe') return;
+    const on = $$('input[name="vibe"]:checked', matcher);
+    if (on.length > 3) e.target.checked = false;
+  });
+
+  function rank(f) {
+    const i = ROOM_INDEX[f.get('m_rooms')];
+    const b = Number(f.get('m_budget'));
+    const work = WORK[f.get('work')];
+    const want = f.getAll('vibe');
+    const median4 = AREAS.map((a) => a.rent[3]).filter(Boolean).sort((x, y) => x - y)[5];
+    return AREAS.map((a) => {
+      const r = a.rent[i];
+      const tags = [...TAGS[a.id], ...((CITY_AVG[i] ? r < CITY_AVG[i] : r < median4) && r ? ['value'] : [])];
+      const fit = !r ? 0.3 : r <= b ? 1 : r <= b * 1.15 ? 0.5 : 0;
+      const d = work ? km(a.at, work.at) : 0;
+      const near = work ? Math.max(0, 1 - d / 7) : 1;
+      const hits = want.filter((w) => tags.includes(w));
+      const score = 0.45 * fit + 0.3 * near + 0.25 * (want.length ? hits.length / want.length : 1);
+      const why = [
+        !r ? `Too few ${ROOM_LABEL[i]} listings to price` : `Average ${eur(r)} for a ${ROOM_LABEL[i]} flat${r <= b ? ', within your budget' : r <= b * 1.15 ? ', a little over your budget' : ', over your budget'}`,
+        work && `${d < 1 ? 'Under 1' : 'About ' + d.toFixed(1)} km from ${work.label} (straight line)`,
+        hits.length && `Matches: ${hits.map((h) => VIBE[h]).join(', ')}`,
+      ].filter(Boolean);
+      return { a, score, why };
+    }).sort((x, y) => y.score - x.score).slice(0, 3);
+  }
+
+  let picks = [];
+  matcher.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(matcher);
+    picks = rank(f);
+    results.innerHTML = `
+      <div class="match-cards">${picks.map((p, n) => `
+        <article class="match-card">
+          <p class="match-rank">${n === 0 ? 'Best fit' : `#${n + 1}`}</p>
+          <h3>${p.a.name}</h3>
+          <p class="muted">${p.a.tagline}</p>
+          <ul>${p.why.map((w) => `<li>${w}</li>`).join('')}</ul>
+          <button type="button" class="btn btn-ghost" data-show="${p.a.id}">Show on map</button>
+        </article>`).join('')}
+      </div>
+      <div class="match-actions">
+        <button type="button" class="btn btn-primary" id="match-use">Use these areas in my request</button>
+        <p class="small muted">Scores weigh budget fit (45%), distance to work (30%) and your priorities (25%). Rents are average asking prices, Mar–Oct 2026.</p>
+      </div>`;
+    results.hidden = false;
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Carry the answers into the request form.
+    wizard.elements.rooms.value = f.get('m_rooms');
+    setBudget(Number(f.get('m_budget')));
+    saveDraft();
+  });
+  results.addEventListener('click', (e) => {
+    const show = e.target.closest('[data-show]');
+    if (show) { selectArea(show.dataset.show); $('#areas').scrollIntoView({ behavior: 'smooth' }); return; }
+    if (e.target.closest('#match-use')) {
+      picks.forEach((p) => { areaInput(p.a).checked = true; });
+      updateBudget();
+      renderCard(current);
+      saveDraft();
+      showStep(1, false);
+      say(`Added ${picks.map((p) => p.a.name).join(', ')} to your request. Now pick your move-in date.`, 'ok');
+      $('#request').scrollIntoView({ behavior: 'smooth' });
     }
   });
 

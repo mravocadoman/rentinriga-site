@@ -14,12 +14,9 @@
   <meta property="og:image" content="https://rentinrigalatvia.lv/assets/img/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="preload" as="image" href="/assets/img/hero.webp" imagesrcset="/assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" imagesizes="(max-width: 960px) 100vw, 46vw">
+  <link rel="preload" as="image" href="/assets/img/hero.webp" imagesrcset="/assets/img/hero-560.webp 560w, /assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" imagesizes="(max-width: 960px) 100vw, 46vw" fetchpriority="high">
 </head>
 <body>
   <header class="site-header">
@@ -33,6 +30,7 @@
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#how">How it works</a></li>
+        <li><a href="#match">Find my area</a></li>
         <li><a href="#areas">Areas</a></li>
         <li><a href="#costs">Costs</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -82,7 +80,7 @@
         </div>
         <div class="hero-visual">
         <figure class="hero-photo">
-          <img src="/assets/img/hero.webp" srcset="/assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" sizes="(max-width: 960px) 100vw, 46vw" width="1600" height="1067" alt="A bright furnished one-bedroom flat with tall windows, a sofa and a work desk">
+          <img src="/assets/img/hero.webp" fetchpriority="high" srcset="/assets/img/hero-560.webp 560w, /assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" sizes="(max-width: 960px) 100vw, 46vw" width="1600" height="1067" alt="A bright furnished one-bedroom flat with tall windows, a sofa and a work desk">
           <figcaption>Illustrative photo</figcaption>
         </figure>
         <div class="float-card" aria-hidden="true">
@@ -139,6 +137,34 @@
             <a class="btn btn-primary" href="#request">Get flat offers <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="match" id="match">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Neighbourhood matcher</p>
+          <h2>Not sure where to live? Answer four questions</h2>
+          <p class="lead">We score all 11 areas on your budget, your commute and what you care about, using the same rent data as the explorer below.</p>
+        </div>
+        <form class="matcher reveal" id="matcher" aria-label="Neighbourhood matcher">
+          <div class="matcher-grid">
+            <fieldset class="field"><legend>Where will you work most days?</legend>
+              <div class="seg"><label class="chip"><input type="radio" name="work" value="centre" checked>Centre / Old Town</label><label class="chip"><input type="radio" name="work" value="skanste">Skanste</label><label class="chip"><input type="radio" name="work" value="teika">Teika / VEF</label><label class="chip"><input type="radio" name="work" value="left">Left bank</label><label class="chip"><input type="radio" name="work" value="remote">Remote</label></div>
+            </fieldset>
+            <fieldset class="field"><legend>Flat size</legend>
+              <div class="seg"><label class="chip"><input type="radio" name="m_rooms" value="1">Studio</label><label class="chip"><input type="radio" name="m_rooms" value="2" checked>1 bedroom</label><label class="chip"><input type="radio" name="m_rooms" value="3">2 bedrooms</label><label class="chip"><input type="radio" name="m_rooms" value="4+">3+ bedrooms</label></div>
+            </fieldset>
+            <label class="field"><span class="field-row"><span>Max rent per month</span><output id="m-budget-out">€700</output></span>
+              <input type="range" name="m_budget" min="300" max="2000" step="50" value="700" aria-label="Maximum monthly rent in euros">
+            </label>
+            <fieldset class="field"><legend>What matters most? <small class="muted">(up to 3)</small></legend>
+              <div class="seg"><label class="chip"><input type="checkbox" name="vibe" value="walk">Walk everywhere</label><label class="chip"><input type="checkbox" name="vibe" value="quiet">Quiet streets</label><label class="chip"><input type="checkbox" name="vibe" value="green">Parks &amp; nature</label><label class="chip"><input type="checkbox" name="vibe" value="new">Modern building</label><label class="chip"><input type="checkbox" name="vibe" value="character">Historic character</label><label class="chip"><input type="checkbox" name="vibe" value="cafes">Cafés &amp; nightlife</label><label class="chip"><input type="checkbox" name="vibe" value="value">Lowest rent</label></div>
+            </fieldset>
+          </div>
+          <button class="btn btn-primary" type="submit">Show my best areas <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <div class="match-results" id="match-results" aria-live="polite" hidden></div>
       </div>
     </section>
 
@@ -409,7 +435,7 @@
           <p>Free flat-matching for people relocating to Riga, Latvia. We connect tenants with rental agencies. We don’t own or list flats ourselves.</p>
         </div>
         <div>
-          <h4>Contact</h4>
+          <p class="foot-h">Contact</p>
           <ul>
             <li><a href="mailto:rihards.zeila@gmail.com">rihards.zeila@gmail.com</a></li>
             <li><a href="tel:+37126673384">+371 26 673 384</a></li>
@@ -417,7 +443,7 @@
           </ul>
         </div>
         <div>
-          <h4>More</h4>
+          <p class="foot-h">More</p>
           <ul>
             <li><a href="/partners/">For rental agencies</a></li>
             <li><a href="/privacy/">Privacy notice</a></li>
@@ -432,8 +458,8 @@
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.8a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.8 9.8 0 1 1 8.3 4.6zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.2 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4 11.8 11.8 0 0 0 8.3-20.1z"/></svg>
   </a>
 
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rentinrigalatvia.lv/#org", "name": "Rent in Riga Latvia", "url": "https://rentinrigalatvia.lv/", "logo": "https://rentinrigalatvia.lv/favicon.svg", "email": "rihards.zeila@gmail.com", "telephone": "+37126673384", "areaServed": {"@type": "City", "name": "Riga"}}, {"@type": "WebSite", "name": "Rent in Riga", "url": "https://rentinrigalatvia.lv/", "publisher": {"@id": "https://rentinrigalatvia.lv/#org"}, "inLanguage": "en"}, {"@type": "Service", "name": "Free flat matching for people relocating to Riga", "serviceType": "Rental housing referral", "provider": {"@id": "https://rentinrigalatvia.lv/#org"}, "areaServed": {"@type": "City", "name": "Riga"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Free for tenants"}}]}</script>
   <script type="application/ld+json" id="faq-schema"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
   <script src="/main.js" defer></script>
 </body>
 </html>
