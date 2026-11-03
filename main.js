@@ -37,6 +37,14 @@
   } else {
     $$('.reveal').forEach((el) => el.classList.add('in'));
   }
+  if ('IntersectionObserver' in window && $('.wa-float')) {
+    const forms = new Set();
+    const fo = new IntersectionObserver((entries) => {
+      entries.forEach((en) => (en.isIntersecting ? forms.add(en.target) : forms.delete(en.target)));
+      document.body.classList.toggle('form-in-view', forms.size > 0);
+    });
+    $$('#wizard, #quick, #calc').forEach((el) => fo.observe(el));
+  }
 
   /* ---------- Where the visitor came from (first touch, kept for the visit) ---------- */
   const leadSource = (() => {
@@ -398,7 +406,7 @@
   /* ---------- Hero quick start → wizard ---------- */
   const quick = $('#quick');
   const monthSel = $('#quick-month');
-  const opts = ['<option value="asap">As soon as possible</option>'];
+  const opts = ['<option value="asap">ASAP</option>'];
   for (let i = 1; i <= 6; i++) {
     const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
     opts.push(`<option value="${iso(d)}">${d.toLocaleString('en-GB', { month: 'long', year: 'numeric' })}</option>`);
