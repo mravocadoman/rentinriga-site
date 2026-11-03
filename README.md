@@ -50,9 +50,9 @@ Leads are forwarded to agencies by hand for now. Record each forward in the `sen
 Push to `main`, and GitHub Actions (`.github/workflows/deploy.yml`) does the rest, the same way as Impromotion:
 
 1. Stamps `?v=<commit>` on our own CSS, JS and image links.
-2. Rsyncs the site files over SSH (port 18765) into `www/rentinrigalatvia.lv/public_html/`, without `--delete`, so the old WordPress install stays in place.
+2. Rsyncs the site files over SSH (port 18765) into `www/rentinrigalatvia.lv/public_html/`, without `--delete`, so `.well-known/` (SSL renewal) is never touched.
 3. Flushes the SiteGround cache.
 
-`index.html` takes precedence over WordPress's `index.php`.
+The old WordPress files were moved to `~/removed-from-public/2026-11-03-wordpress/` on the server (with its original `.htaccess`); nothing was deleted, and its database still exists. Our `.htaccess` serves `404.html`, redirects `www.` to the bare domain and answers 410 for old WordPress endpoints (`/feed/`, `/wp-json/`, `wp-login.php`, …), so search engines drop them.
 
 The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG_USER` (`u1891-1ebmevm4ybzb`). The deploy key lives at `~/.ssh/rentinriga_siteground` on Rihards' Mac and is imported as "Github deploy" in Site Tools → Devs → SSH Keys Manager for this site. New top-level files or folders have to be added to the rsync list.

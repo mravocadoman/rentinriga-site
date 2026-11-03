@@ -30,7 +30,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p 18765 "$SG_HOST" >> ~/.ssh/known_hosts
 
-      # Only the site's own files. No --delete: the old WordPress install still lives in public_html.
+      # Only the site's own files. No --delete: public_html also holds .well-known/ for SSL renewal.
       - name: Upload
         env:
           SG_HOST: ${{ secrets.SG_HOST }}
