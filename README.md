@@ -62,7 +62,7 @@ Both forms POST `text/plain` JSON to the n8n workflow **Rent in Riga — leads**
 2. Saves the lead to the n8n data table **Rent in Riga leads** (`IfphWRSOm2SkfFaD`, status `new`).
 3. Answers the site.
 4. E-mails rihards.zeila@gmail.com with reply-to set to the lead. The block between the dashed lines can be forwarded to an agency as-is.
-5. Sends a Telegram message to Rihards' private chat.
+5. Sends a Telegram message to Rihards' private chat. The alert text is HTML-escaped and sent with `parse_mode: HTML`, because Telegram's default Markdown dropped `[RU]` and would fail on names containing `_` or `*`.
 
 Failures go to the shared alert workflow.
 
@@ -84,4 +84,4 @@ The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG
 
 ## Search Console
 
-URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day, and indexing of the homepage was requested so Google replaces the old WordPress version. After adding a page, add it to `sitemap.xml`.
+URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day; it reads Success, with 18 pages discovered. Indexing was requested for `/`, `/riga-rent-prices/` and `/ru/`. The build regenerates `sitemap.xml`; a page added outside the build has to be added to `urls` in `tools/build.py`.
