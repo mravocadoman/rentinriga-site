@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rent a Flat in Riga – Free Matching for Relocating Professionals | Rent in Riga</title>
+  <meta name="description" content="Moving to Riga? Tell us your dates, budget and area in two minutes. We send your request to up to three rental agencies, who reply with matching flats. Free for tenants.">
+  <link rel="canonical" href="https://rentinrigalatvia.lv/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Find your flat in Riga before you land">
+  <meta property="og:description" content="One short request, offers from up to three rental agencies. Free for tenants.">
+  <meta property="og:url" content="https://rentinrigalatvia.lv/">
+  <meta property="og:image" content="https://rentinrigalatvia.lv/assets/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preload" as="image" href="/assets/img/hero.webp" imagesrcset="/assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" imagesizes="(max-width: 960px) 100vw, 46vw">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main">
+      <a class="logo" href="/" aria-label="Rent in Riga, home">
+        <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#b4472c"/><path d="M8 24V14l8-6 8 6v10h-5.5v-6h-5v6z" fill="#fff"/></svg>
+        Rent in Riga
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#areas">Areas</a></li>
+        <li><a href="#costs">Costs</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/partners/">For agencies</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#request">Get flat offers</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Relocating to Riga, Latvia</p>
+          <h1>Find your flat in Riga <em>before you land.</em></h1>
+          <p class="lead">Tell us your dates, budget and favourite areas in about two minutes. We pass your request to up to three rental agencies, who reply with flats that actually fit. It’s free for you.</p>
+          <form class="quick" id="quick" aria-label="Start your request">
+            <label>Move-in
+              <select name="month" id="quick-month"></select>
+            </label>
+            <label>Stay
+              <select name="stay">
+                <option value="1-3">1–3 months</option>
+                <option value="3-6">3–6 months</option>
+                <option value="6-12" selected>6–12 months</option>
+                <option value="12+">12+ months</option>
+              </select>
+            </label>
+            <label>Budget / month
+              <select name="budget">
+                <option value="500">up to €500</option>
+                <option value="700">up to €700</option>
+                <option value="900" selected>up to €900</option>
+                <option value="1200">up to €1,200</option>
+                <option value="1600">up to €1,600</option>
+                <option value="2500">€1,600+</option>
+              </select>
+            </label>
+            <button class="btn btn-primary" type="submit">Start my request</button>
+          </form>
+          <ul class="trust">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free for tenants</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>English-speaking agents</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No obligation to accept anything</li>
+          </ul>
+        </div>
+        <figure class="hero-photo">
+          <img src="/assets/img/hero.webp" srcset="/assets/img/hero-800.webp 800w, /assets/img/hero.webp 1600w" sizes="(max-width: 960px) 100vw, 46vw" width="1600" height="1067" alt="A bright furnished one-bedroom flat with tall windows, a sofa and a work desk">
+          <figcaption>Illustrative photo</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>One request instead of fifty listings</h2>
+          <p class="lead">Riga listings are mostly in Latvian, many vanish within days, and the good ones go to whoever calls first. We hand your brief to agents who do this every day.</p>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><h3>Tell us what you need</h3><p>Dates, length of stay, budget, rooms and the areas you like. About two minutes.</p></li>
+          <li class="reveal"><h3>Agencies pick it up</h3><p>We check your request and send it to up to three rental agencies that cover your areas and budget.</p></li>
+          <li class="reveal"><h3>Compare offers, then choose</h3><p>Agents reach you by e-mail or WhatsApp with matching flats and viewing times, in person or by video call.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="areas" id="areas">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Neighbourhood explorer</p>
+          <h2>Where to live in Riga</h2>
+          <p class="lead">Pick an area to see typical asking rents, what it feels like, and how it connects to the rest of the city. Add it to your request with one tap.</p>
+        </div>
+        <div class="area-tabs" id="area-tabs" role="toolbar" aria-label="Riga areas"></div>
+        <div class="areas-grid">
+          <div id="map" role="region" aria-label="Map of Riga areas"></div>
+          <article class="area-card" id="area-card" aria-live="polite"></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="costs">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Move-in cost calculator</p>
+          <h2>What you’ll pay up front</h2>
+          <p class="lead">The first month in Riga costs more than the rent. The deposit, the first month’s rent and often an agency fee are due when you sign. Here’s a rough total.</p>
+        </div>
+        <div class="calc">
+          <form class="calc-inputs" id="calc" aria-label="Move-in cost calculator">
+            <label class="field">
+              <span class="field-row"><span>Monthly rent</span><output id="calc-rent-out">€700</output></span>
+              <input type="range" id="calc-rent" name="rent" min="250" max="3000" step="25" value="700">
+            </label>
+            <fieldset class="field">
+              <legend>Security deposit</legend>
+              <div class="seg">
+                <label class="chip"><input type="radio" name="deposit" value="1" checked>1 month</label>
+                <label class="chip"><input type="radio" name="deposit" value="2">2 months</label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend>Agency fee</legend>
+              <div class="seg">
+                <label class="chip"><input type="radio" name="fee" value="0">None</label>
+                <label class="chip"><input type="radio" name="fee" value="0.5" checked>50% of a month</label>
+                <label class="chip"><input type="radio" name="fee" value="1">A full month</label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend>Flat size (for heating)</legend>
+              <div class="seg">
+                <label class="chip"><input type="radio" name="size" value="small" checked>About 45 m²</label>
+                <label class="chip"><input type="radio" name="size" value="mid">About 70 m²</label>
+                <label class="chip"><input type="radio" name="size" value="large">About 100 m²</label>
+              </div>
+            </fieldset>
+          </form>
+          <div class="calc-out" aria-live="polite">
+            <h3>Due when you sign</h3>
+            <p class="big" id="calc-total">€1,750</p>
+            <dl>
+              <dt>First month’s rent</dt><dd id="calc-first">€700</dd>
+              <dt>Deposit (refundable)</dt><dd id="calc-dep">€700</dd>
+              <dt>Agency fee</dt><dd id="calc-fee">€350</dd>
+            </dl>
+            <h3>Every month after</h3>
+            <dl>
+              <dt>Rent</dt><dd id="calc-rent2">€700</dd>
+              <dt>Heating in December–January</dt><dd id="calc-heat">€45–€145</dd>
+            </dl>
+            <p class="small muted">Plus water, waste, the building management fee, electricity and internet. Ask the agent for last winter’s bills. The heating range runs from an insulated building to one that isn’t. It is scaled from Rīgas siltums’ published example for a 45 m² flat, excluding VAT, and tariffs change each season.</p>
+            <a class="btn btn-primary" href="#request" id="calc-cta">Use this budget in my request</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="wrap split">
+        <img src="/assets/img/arrival.webp" width="720" height="720" loading="lazy" alt="Someone walking down a cobbled old-town street with a suitcase and a backpack">
+        <div>
+          <p class="eyebrow">Who it’s for</p>
+          <h2>Built for people moving here for work</h2>
+          <p class="lead">Most of our requests come from engineers, analysts and product people starting a new job in Riga, or working remotely from here.</p>
+          <div class="cards">
+            <article class="reveal"><h3>Starting a new job</h3><p>Need a furnished place close to the office from day one? Agencies can line up video viewings before you arrive.</p></article>
+            <article class="reveal"><h3>Couples and families</h3><p>Tell us about schools, kindergartens, parking or pets, and agents will filter for them.</p></article>
+            <article class="reveal"><h3>Companies relocating staff</h3><p>HR or relocation managers can send one request for each new hire. Tick “my employer is relocating me” and we’ll flag it for agencies that invoice companies.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="safety" id="safety">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Stay safe</p>
+          <h2>How to avoid rental scams in Riga</h2>
+          <p class="lead">Scammers target newcomers who can’t view a flat in person. These four rules protect you, whoever you rent through.</p>
+        </div>
+        <ul>
+          <li class="reveal"><b>Never pay before a viewing</b>See the flat in person or on a live video call where the agent walks through it, and check that the keys work.</li>
+          <li class="reveal"><b>Sign a written contract</b>It should list the rent, the deposit, what’s included, the notice period and the inventory. Ask for an English copy.</li>
+          <li class="reveal"><b>Check who owns it</b>A real agent or owner can show proof of ownership or a signed agreement with the owner. The owner of any flat can be checked in the Land Register (zemesgramata.lv).</li>
+          <li class="reveal"><b>Pay by bank transfer</b>Pay to a named account and get a receipt. Avoid cash handed to strangers, crypto and money transfer services.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="request" id="request">
+      <div class="wrap request-grid">
+        <div>
+          <p class="eyebrow">Your request</p>
+          <h2>Get offers from agents who know Riga</h2>
+          <p class="lead">Three short steps. We only share your details with the agencies handling your request, and only because you tick the box at the end.</p>
+          <ul class="promise">
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Your request goes to <b>up to three</b> agencies, never a mailing list.</span></li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>We aim to pass it on within one working day.</span></li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg><span>Our service is free. Agencies tell you their own fee, if any, before you commit.</span></li>
+          </ul>
+        </div>
+
+        <form class="wizard" id="wizard" novalidate>
+          <div class="progress" aria-hidden="true"><span class="done"></span><span></span><span></span></div>
+          <p class="step-label" id="step-label">Step 1 of 3: Your stay</p>
+
+          <fieldset class="step" data-step="1">
+            <legend>When are you moving?</legend>
+            <div class="grid-2">
+              <label class="field"><span>Move-in date</span><input type="date" name="move_in" required></label>
+              <label class="field"><span>Length of stay</span>
+                <select name="stay" required>
+                  <option value="1-3">1–3 months</option>
+                  <option value="3-6">3–6 months</option>
+                  <option value="6-12" selected>6–12 months</option>
+                  <option value="12+">12+ months</option>
+                </select>
+              </label>
+            </div>
+            <div class="grid-3">
+              <label class="field"><span>Adults</span>
+                <select name="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select>
+              </label>
+              <label class="field"><span>Children</span>
+                <select name="children"><option selected>0</option><option>1</option><option>2</option><option>3+</option></select>
+              </label>
+              <label class="field"><span>Pets</span>
+                <select name="pets"><option value="" selected>None</option><option>Cat</option><option>Small dog</option><option>Large dog</option><option>Other</option></select>
+              </label>
+            </div>
+            <p class="hint" id="stay-hint"></p>
+          </fieldset>
+
+          <fieldset class="step" data-step="2" hidden>
+            <legend>What kind of flat?</legend>
+            <div class="field">
+              <span class="field-row"><span>Max rent per month, before utilities</span><output id="budget-out">€900</output></span>
+              <input type="range" name="budget" min="300" max="3000" step="50" value="900" aria-label="Maximum monthly rent in euros">
+            </div>
+            <div class="grid-2">
+              <label class="field"><span>Rooms <small class="muted">(Latvian listings count all rooms)</small></span>
+                <select name="rooms" required>
+                  <option value="1">1 room (studio)</option>
+                  <option value="2" selected>2 rooms (1 bedroom)</option>
+                  <option value="3">3 rooms (2 bedrooms)</option>
+                  <option value="4+">4+ rooms (3+ bedrooms)</option>
+                </select>
+              </label>
+              <label class="field"><span>Furnished</span>
+                <select name="furnished"><option value="yes" selected>Yes, fully</option><option value="either">Either is fine</option><option value="no">No, unfurnished</option></select>
+              </label>
+            </div>
+            <fieldset class="field">
+              <legend class="field-label"><span>Preferred areas</span> <small class="muted">(pick any, or none)</small></legend>
+              <div class="seg" id="area-chips"></div>
+            </fieldset>
+            <p class="budget-hint" id="budget-hint" aria-live="polite"></p>
+            <fieldset class="field">
+              <legend class="field-label">Must-haves</legend>
+              <div class="seg">
+                <label class="chip"><input type="checkbox" name="wants" value="Home-office space">Home-office space</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Fast internet">Fast internet</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Lift">Lift</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Parking">Parking</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Balcony">Balcony</label>
+                <label class="chip"><input type="checkbox" name="wants" value="New building">New building</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Dishwasher">Dishwasher</label>
+                <label class="chip"><input type="checkbox" name="wants" value="Near tram/bus">Near tram/bus</label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <fieldset class="step" data-step="3" hidden>
+            <legend>Where can agents reach you?</legend>
+            <div class="grid-2">
+              <label class="field"><span>Full name</span><input name="name" autocomplete="name" required maxlength="100"></label>
+              <label class="field"><span>E-mail</span><input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+              <label class="field"><span>Phone / WhatsApp <small class="muted">(optional)</small></span><input name="phone" type="tel" autocomplete="tel" placeholder="+44 7700 900123" maxlength="40"></label>
+              <label class="field"><span>Best way to reach you</span>
+                <select name="channel"><option value="email">E-mail</option><option value="whatsapp">WhatsApp</option><option value="phone">Phone call</option></select>
+              </label>
+            </div>
+            <label class="consent"><input type="checkbox" name="relocation" value="employer"> <span>My employer is relocating me or paying for housing</span></label>
+            <label class="field"><span>Employer <small class="muted">(optional)</small></span><input name="company" autocomplete="organization" maxlength="120"></label>
+            <label class="field"><span>Anything else? <small class="muted">(optional)</small></span><textarea name="message" maxlength="3000" placeholder="E.g. walking distance to my office in Skanste, quiet street, kindergarten nearby…"></textarea></label>
+            <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="consent"><input type="checkbox" name="consent" required> <span>I agree that Rent in Riga may share this request with up to three partner rental agencies so they can contact me with offers. See the <a href="/privacy/" target="_blank">privacy notice</a>.</span></label>
+          </fieldset>
+
+          <div class="done-panel" id="done" hidden tabindex="-1">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+            <h3>Request received. Thank you!</h3>
+            <p class="muted">Here’s what happens next:</p>
+            <ol>
+              <li>We check your request, usually within one working day.</li>
+              <li>Up to three agencies get in touch by your preferred channel.</li>
+              <li>You compare flats, book viewings and choose. No obligation.</li>
+            </ol>
+            <p class="small muted">Nothing after a couple of days? Write to <a href="mailto:rihards.zeila@gmail.com">rihards.zeila@gmail.com</a>.</p>
+          </div>
+
+          <div class="wizard-nav" id="wizard-nav">
+            <button type="button" class="btn btn-ghost" id="back" hidden>Back</button>
+            <button type="button" class="btn btn-primary" id="next">Continue</button>
+            <button type="submit" class="btn btn-primary" id="submit" hidden>Send my request</button>
+          </div>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Renting in Riga: the short answers</h2>
+        </div>
+        <div class="faq" id="faq-list">
+          <details><summary>What does Rent in Riga cost me?</summary><p>Nothing. The agencies we work with pay us when they receive requests. An agency may charge you its own commission when you rent through it, and it has to tell you that before you agree to anything.</p></details>
+          <details><summary>How much is the agency fee in Riga?</summary><p>There’s no fixed rate. On agency listings it’s commonly 50% of one month’s rent, paid by the tenant. Flats rented straight from a private owner often have no fee. Ask about the fee before you book a viewing.</p></details>
+          <details><summary>How big is the security deposit?</summary><p>Usually one month’s rent. Latvian tenancy law caps it at two months’ rent. The landlord has to return any unused part when you move out, unless your contract says otherwise. Deductions are for unpaid bills or damage.</p></details>
+          <details><summary>Are utilities included in the rent?</summary><p>Usually not. Expect separate bills for heating, water, waste, the building management fee and electricity, plus internet. Heating is the big one. It runs through the cold months, and an un-insulated building can cost two to three times as much to heat as an insulated one. Ask for last winter’s bills.</p></details>
+          <details><summary>Can I rent for just one to three months?</summary><p>Yes, but there’s less choice, because most landlords prefer longer leases. Serviced apartments are the other option. Choose “1–3 months” in your request and we’ll send it to agencies that handle short lets.</p></details>
+          <details><summary>Can I arrange everything before I arrive?</summary><p>Often, yes. Many agents do live video viewings and send the contract for e-signing. Never pay a deposit for a flat nobody has shown you on a live video call or in person.</p></details>
+          <details><summary>Do I need to register my address?</summary><p>Yes, if you live here on a residence permit or an EU registration certificate. You declare your place of residence within one month of moving in, and you can do it online at latvija.gov.lv. Your lease is the legal basis for the address. EU citizens staying longer than three months must also get a registration certificate from the Office of Citizenship and Migration Affairs. Check the current rules at <a href="https://www.pmlp.gov.lv/en/declaration-residence-place" rel="noopener" target="_blank">pmlp.gov.lv</a>.</p></details>
+          <details><summary>What should the lease include?</summary><p>Under Latvia’s Residential Tenancy Law (2021), a lease must be in writing and fixed-term. It should state the rent, how and when the rent can change, the deposit, who pays which bills, and an inventory of the furniture. Tenants can usually end the lease with one month’s written notice. Read the full law at <a href="https://likumi.lv/ta/id/322216" rel="noopener" target="_blank">likumi.lv</a>.</p></details>
+          <details><summary>Is Rent in Riga a landlord or an agency?</summary><p>Neither. We’re a free matching service. We don’t own or list flats. We send your request to independent rental agencies, and you sign the lease with them or with the owner.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="/">
+            <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#b4472c"/><path d="M8 24V14l8-6 8 6v10h-5.5v-6h-5v6z" fill="#fff"/></svg>
+            Rent in Riga
+          </a>
+          <p>Free flat-matching for people relocating to Riga, Latvia. We connect tenants with rental agencies. We don’t own or list flats ourselves.</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:rihards.zeila@gmail.com">rihards.zeila@gmail.com</a></li>
+            <li><a href="tel:+37126673384">+371 26 673 384</a></li>
+            <li><a href="https://wa.me/37126673384" rel="noopener" target="_blank">WhatsApp</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>More</h4>
+          <ul>
+            <li><a href="/partners/">For rental agencies</a></li>
+            <li><a href="/privacy/">Privacy notice</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="small">© <span data-year>2026</span> Rent in Riga Latvia</p>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/37126673384?text=Hi%2C%20I%27m%20looking%20for%20a%20flat%20in%20Riga" rel="noopener" target="_blank" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.5 3.5 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.8 13.8 0 0 0 5.3 4.7c2 .8 2.7.9 3.7.8a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.8 9.8 0 1 1 8.3 4.6zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.2 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4 11.8 11.8 0 0 0 8.3-20.1z"/></svg>
+  </a>
+
+  <script type="application/ld+json" id="faq-schema"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+  <script src="/main.js" defer></script>
+</body>
+</html>
