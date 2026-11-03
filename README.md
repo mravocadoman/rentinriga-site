@@ -1,10 +1,10 @@
 # Rent in Riga Latvia
 
-rentinrigalatvia.lv rebuilt from WordPress (Divi) as a lead-generation site: people relocating to Riga send one rental request, and we pass it to up to three partner agencies. Static HTML/CSS/JS, English only, no build step, no dependencies beyond Leaflet from cdnjs.
+rentinrigalatvia.lv rebuilt from WordPress (Divi) as a lead-generation site: people relocating to Riga send one rental request, and we pass it to up to three partner agencies. Static HTML/CSS/JS, English only, no build step. The font (Plus Jakarta Sans, OFL) is self-hosted in `assets/fonts/` (latin + latin-ext, which Latvian letters need). Leaflet loads from cdnjs only when the map scrolls near.
 
 ## Files
 
-- `index.html`: homepage (hero quick start, how it works, area explorer + map, move-in cost calculator, scam tips, 3-step request wizard, FAQ)
+- `index.html`: homepage (hero quick start, how it works, comparison, neighbourhood matcher, area explorer + map, move-in cost calculator, scam tips, 3-step request wizard, FAQ, closing CTA)
 - `partners/`: page for rental agencies, with the partner application form
 - `privacy/`: GDPR notice. Keep it in step with what the forms collect and where the data goes.
 - `styles.css`, `main.js`: shared by every page. `main.js` returns early on pages without the wizard.
@@ -26,6 +26,8 @@ Every figure on the site comes from a dated source:
 
 - Area rents (`AREAS` in `main.js`): viszinis.lv average asking rent per neighbourhood, 1 Mar – 31 Oct 2026, by Latvian room count.
 - City-wide fallback (`CITY`): vericity.ai median of about 2,175 listings, 2 Nov 2026.
+- City-wide averages for the "vs Riga average" badges and the matcher's "Lowest rent" (`CITY_AVG`): viszinis.lv, same dataset and period as the area rents.
+- Matcher (`TAGS`, `WORK` in `main.js`): area tags mirror the area card copy, and commute is the straight-line distance to the chosen work district. The score weighs budget fit 45%, distance 30% and priorities 25%.
 - Heating (`HEAT`): scaled from Rīgas siltums' 45 m² example (insulated €46–57, not insulated €116–142 a month in Dec–Jan, excl. VAT).
 - Deposit cap of 2 months, written lease, fixed term, 1-month tenant notice: Dzīvojamo telpu īres likums (likumi.lv/ta/id/322216).
 
