@@ -64,6 +64,11 @@ Both forms POST `text/plain` JSON to the n8n workflow **Rent in Riga — leads**
 4. E-mails rihards.zeila@gmail.com with reply-to set to the lead. The block between the dashed lines can be forwarded to an agency as-is.
 5. Sends a Telegram message to Rihards' private chat. The alert text is HTML-escaped and sent with `parse_mode: HTML`, because Telegram's default Markdown dropped `[RU]` and would fail on names containing `_` or `*`.
 
+6. Sends tenants (not agencies) a confirmation e-mail, "Rent in Riga" from Rihards' Gmail, in the site's language.
+   - It contains only fixed text and validated fields (dates, rooms, budget, and areas from the known list), never the name or the notes. That way the form can't be used to mail arbitrary text to a stranger.
+   - At most one goes to each address per 24 hours. The workflow remembers a hash of the address, not the address itself.
+   - If it fails, nothing else is affected.
+
 Failures go to the shared alert workflow.
 
 Leads are forwarded to agencies by hand for now. Record each forward in the `sent_to` column.
