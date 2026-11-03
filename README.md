@@ -43,7 +43,9 @@ Both forms POST `text/plain` JSON to the n8n workflow **Rent in Riga — leads**
 
 Failures go to the shared alert workflow.
 
-Leads are forwarded to agencies by hand for now. Record each forward in the `sent_to` column. The privacy notice promises deletion after 12 months.
+Leads are forwarded to agencies by hand for now. Record each forward in the `sent_to` column.
+
+Retention: the n8n workflow **Rent in Riga — delete leads after 12 months** (`tuTr2xL1aH7kEtOx`, source in `n8n/retention-workflow.js`) runs daily at 03:15 Riga time. It deletes rows whose `createdAt` is more than 12 months old, which keeps the privacy notice's promise. A guard stops it from ever using a cutoff younger than 360 days. Successful runs aren't saved, so execution logs keep no copies of deleted leads.
 
 ## Deploy
 
