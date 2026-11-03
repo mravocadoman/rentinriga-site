@@ -106,70 +106,9 @@
   if (!wizard) return; // the rest is the homepage only
 
   /* ---------- Area data ----------
-     rent = average asking rent, EUR/month excl. utilities, by Latvian room count [1, 2, 3, 4+],
-     viszinis.lv per-neighbourhood averages, 1 Mar – 31 Oct 2026 (checked 3 Nov 2026). */
-  const AREAS = [
-    { id: 'centre', name: 'Centre', lv: 'Centrs', at: [56.9575, 24.1185], rent: [440, 670, 975, 1170],
-      tagline: 'Art Nouveau streets, cafés and offices within walking distance.',
-      feel: 'Grand early-1900s buildings, busy by day, lively evenings. The “quiet centre” around Alberta iela is calmer.',
-      move: 'Walk or cycle almost everywhere; most public transport lines pass through.',
-      good: 'A car-free life and short commutes.' },
-    { id: 'old-town', name: 'Old Town', lv: 'Vecrīga', at: [56.9490, 24.1065], rent: [490, 630, 935, 1435],
-      tagline: 'Medieval lanes at the heart of Riga’s UNESCO-listed historic centre.',
-      feel: 'Beautiful and central, but touristy and loud on weekend nights. Lifts and parking are rare.',
-      move: 'On foot. Cars are restricted in much of it.',
-      good: 'Short stays and people who want the postcard.' },
-    { id: 'kipsala', name: 'Ķīpsala', lv: 'Ķīpsala', at: [56.9555, 24.0805], rent: [470, 870, 1175, null],
-      tagline: 'A quiet island across the river from the Old Town.',
-      feel: 'Riverside apartment buildings, restored wooden houses and a university campus. Calm, with skyline views.',
-      move: 'Across the Vanšu bridge to the centre; buses and cycling.',
-      good: 'People who want calm close to town.' },
-    { id: 'skanste', name: 'Skanste', lv: 'Skanste', at: [56.9690, 24.1240], rent: [460, 770, 1205, 1705],
-      tagline: 'Riga’s new business district, next to the centre.',
-      feel: 'Glass offices, new-build towers and the Arena Riga. Modern flats, often with parking.',
-      move: 'Walk to the centre; buses and trolleybuses along Skanstes iela.',
-      good: 'Working in the Skanste offices; anyone who wants a new building.' },
-    { id: 'teika', name: 'Teika', lv: 'Teika', at: [56.9745, 24.1720], rent: [300, 505, 820, 980],
-      tagline: 'Green, residential and practical.',
-      feel: 'Pre-war and Soviet-era blocks among parks, with shops on Brīvības gatve. Several large office complexes nearby.',
-      move: 'Public transport along Brīvības gatve runs straight to the centre.',
-      good: 'Offices in the Teika / VEF area; good value with an easy commute.' },
-    { id: 'agenskalns', name: 'Āgenskalns', lv: 'Āgenskalns', at: [56.9435, 24.0705], rent: [330, 535, 765, 1035],
-      tagline: 'Wooden houses and a market hall across the river.',
-      feel: 'One of Riga’s most charming neighbourhoods: historic wooden architecture, the Āgenskalns market and local cafés.',
-      move: 'Trams over the Stone Bridge to the Old Town and centre.',
-      good: 'Character on a reasonable budget.' },
-    { id: 'tornakalns', name: 'Torņakalns', lv: 'Torņakalns', at: [56.9345, 24.0920], rent: [335, 525, 795, 1215],
-      tagline: 'Left-bank area next to Victory Park.',
-      feel: 'A mix of new developments and older streets near the University of Latvia’s science campus.',
-      move: 'Trams, buses and Torņakalns train station.',
-      good: 'New flats with green space and fair prices.' },
-    { id: 'avoti', name: 'Avoti & Grīziņkalns', lv: 'Avoti, Grīziņkalns', at: [56.9530, 24.1460], rent: [330, 505, 715, 835],
-      tagline: 'Just east of the centre, cheaper and a bit rough around the edges.',
-      feel: 'Older brick and wooden buildings, Grīziņkalns park and a growing café scene. Building quality varies a lot.',
-      move: 'Within walking distance of the centre.',
-      good: 'Being close to the centre for less money.' },
-    { id: 'mezaparks', name: 'Mežaparks', lv: 'Mežaparks', at: [57.0005, 24.1475], rent: [390, 710, 955, 1275],
-      tagline: 'A garden district of villas in a pine forest.',
-      feel: 'Quiet and leafy, by Lake Ķīšezers and the Song Festival grounds. Mostly houses and small apartment buildings.',
-      move: 'Tram to the centre; a car helps.',
-      good: 'Families, dog owners and lovers of nature.' },
-    { id: 'purvciems', name: 'Purvciems', lv: 'Purvciems', at: [56.9590, 24.1960], rent: [310, 420, 530, 620],
-      tagline: 'A large housing estate with Riga’s lowest rents.',
-      feel: 'Soviet-era apartment blocks, some renovated, with big supermarkets and shopping centres.',
-      move: 'Buses and trolleybuses to the centre; allow more time than from the inner areas.',
-      good: 'Tight budgets and bigger flats for the money.' },
-    { id: 'imanta', name: 'Imanta', lv: 'Imanta', at: [56.9530, 23.9960], rent: [305, 425, 490, 830],
-      tagline: 'A quiet western housing estate with a train link.',
-      feel: 'Residential and green, near forest and the road to Jūrmala.',
-      move: 'Suburban train and public transport to the centre.',
-      good: 'Low rents and easy trips to the seaside.' },
-  ];
-  // City-wide asking rent (vericity.ai median of ~2,175 listings, 2 Nov 2026) for when no area is picked.
-  // ponytail: no reliable city-wide typical 4+ room figure, so the hint stays quiet for that size.
-  const CITY = [340, 590, 850, null];
-  // City-wide averages from the same viszinis.lv dataset and period, so "vs Riga average" compares like with like.
-  const CITY_AVG = [336, 489, 709, null];
+     One source: data/areas.json, built into assets/areas.js by tools/build.py (see README). */
+  const { areas: AREAS, city_median: CITY, city_avg: CITY_AVG } = window.RR_DATA;
+  // ponytail: no reliable city-wide typical 4+ room figure, so the budget hint stays quiet for that size.
   const MAX_RENT = [0, 1, 2, 3].map((i) => Math.max(...AREAS.map((a) => a.rent[i] || 0)));
   const ROOM_INDEX = { 1: 0, 2: 1, 3: 2, '4+': 3 };
   const ROOM_LABEL = ['1-room (studio)', '2-room (1 bed)', '3-room (2 beds)', '4+ room (3+ beds)'];
@@ -203,7 +142,10 @@
         <li><b>Getting around:</b> ${a.move}</li>
         <li><b>Good for:</b> ${a.good}</li>
       </ul>
-      <button type="button" class="btn ${picked ? 'btn-ghost' : 'btn-primary'}" data-pick="${a.id}">${picked ? '✓ In my request (remove)' : 'Add to my request'}</button>
+      <div class="card-actions">
+        <button type="button" class="btn ${picked ? 'btn-ghost' : 'btn-primary'}" data-pick="${a.id}">${picked ? '✓ In my request (remove)' : 'Add to my request'}</button>
+        <a class="guide-link" href="/areas/${a.id}/">Full ${a.name} guide →</a>
+      </div>
       <p class="source-note">Average monthly asking rent, excl. utilities, from listings between March and October 2026 (viszinis.lv). The % compares with the Riga-wide average from the same data, and bars are scaled to the priciest area. Signed rents can be lower, and a 1-room flat in newer areas such as Skanste is often larger.</p>`;
   }
 
@@ -439,6 +381,13 @@
   wizard.addEventListener('input', saveDraft);
   wizard.addEventListener('change', saveDraft);
   loadDraft();
+  // Links from the area guides and ads can prefill the form: /?area=teika&rooms=2&budget=700#request
+  const params = new URLSearchParams(location.search);
+  const linked = AREAS.find((a) => a.id === params.get('area'));
+  if (linked) { areaInput(linked).checked = true; selectArea(linked.id, { pan: false }); }
+  if (params.get('rooms') in ROOM_INDEX) wizard.elements.rooms.value = params.get('rooms');
+  if (Number(params.get('budget')) > 0) budget.value = Number(params.get('budget'));
+  if (linked || params.has('rooms') || params.has('budget')) saveDraft();
   updateBudget();
   stayHint();
 
@@ -500,12 +449,7 @@
   });
 
   /* ---------- Neighbourhood matcher ---------- */
-  // Tags mirror what each area card already says; "value" is computed from the rent data instead.
-  const TAGS = {
-    centre: ['walk', 'cafes'], 'old-town': ['walk', 'character', 'cafes'], kipsala: ['quiet', 'character', 'new'],
-    skanste: ['new'], teika: ['quiet', 'green'], agenskalns: ['character', 'cafes'], tornakalns: ['green', 'new'],
-    avoti: ['walk', 'cafes'], mezaparks: ['quiet', 'green'], purvciems: [], imanta: ['quiet', 'green'],
-  };
+
   const WORK = {
     centre: { at: [56.9520, 24.1130], label: 'the centre' }, skanste: { at: [56.9690, 24.1240], label: 'Skanste' },
     teika: { at: [56.9725, 24.1650], label: 'Teika / VEF' }, left: { at: [56.9470, 24.0850], label: 'the left bank' },
@@ -537,7 +481,7 @@
     const median4 = AREAS.map((a) => a.rent[3]).filter(Boolean).sort((x, y) => x - y)[5];
     return AREAS.map((a) => {
       const r = a.rent[i];
-      const tags = [...TAGS[a.id], ...((CITY_AVG[i] ? r < CITY_AVG[i] : r < median4) && r ? ['value'] : [])];
+      const tags = [...a.tags, ...((CITY_AVG[i] ? r < CITY_AVG[i] : r < median4) && r ? ['value'] : [])];
       const fit = !r ? 0.3 : r <= b ? 1 : r <= b * 1.15 ? 0.5 : 0;
       const d = work ? km(a.at, work.at) : 0;
       const near = work ? Math.max(0, 1 - d / 7) : 1;
