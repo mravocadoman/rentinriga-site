@@ -63,6 +63,8 @@ const units = clip(body.units, 40);
 const message = clip(body.message, 3000);
 const source = clip(body.source, 200);
 const page = clip(body.page, 300);
+const lang = body.lang === 'ru' ? 'ru' : 'en';
+const langLine = lang === 'ru' ? 'Russian (the lead used the Russian site; reply in Russian if you can)' : '';
 
 const line = (k, v) => (v ? k + ': ' + v + NL : '');
 let subject, detail, alert;
@@ -71,14 +73,14 @@ if (kind === 'tenant') {
   subject = 'Rent in Riga request: ' + (what || 'flat') + ' | ' + name;
   // The block between the rules is safe to forward to a partner agency as-is (the lead consented to that).
   detail = '---- request (forwardable) ----' + NL +
-    line('Name', name) + line('E-mail', email) + line('Phone / WhatsApp', phone) + line('Prefers', channel) +
+    line('Language', langLine) + line('Name', name) + line('E-mail', email) + line('Phone / WhatsApp', phone) + line('Prefers', channel) +
     line('Move-in', moveInLv) + line('Length of stay', stay && stay + ' months') + line('Who', people) +
     line('Budget (max, per month)', budget && 'EUR ' + budget) + line('Rooms', rooms) + line('Furnished', furnished) +
     line('Areas', areas) + line('Must-haves', wants) +
     line('Relocation', relocation === 'employer' ? 'employer-backed' + (company ? ' (' + company + ')' : '') : (company ? 'self, works at ' + company : '')) +
     (message ? NL + message + NL : '') + '-------------------------------' + NL +
     line('Source', source) + line('Page', page);
-  alert = '🏠 New rental request' + NL + name + ' | ' + (what || '-') + (areas ? NL + 'Areas: ' + areas : '') +
+  alert = '🏠 New rental request' + (lang === 'ru' ? ' [RU]' : '') + NL + name + ' | ' + (what || '-') + (areas ? NL + 'Areas: ' + areas : '') +
     (relocation === 'employer' ? NL + '💼 Employer-backed' + (company ? ': ' + company : '') : '') +
     NL + [phone, email].filter(Boolean).join(' | ') + (source ? NL + '🔗 ' + source : '');
 } else {
@@ -94,7 +96,7 @@ return [{ json: {
   row: {
     kind, name, email, phone, channel, move_in: moveIn, stay, people, budget, rooms: rooms + (furnished ? ' / furnished: ' + furnished : ''),
     areas, wants, company: kind === 'partner' ? [company, website, units && units + ' flats'].filter(Boolean).join(' | ') : company,
-    message, source, page, consent_at: new Date().toISOString(), status: 'new', sent_to: '', raw: JSON.stringify(body).slice(0, 8000),
+    message, source: (lang === 'ru' ? '[ru] ' : '') + source, page, consent_at: new Date().toISOString(), status: 'new', sent_to: '', raw: JSON.stringify(body).slice(0, 8000),
   },
   email, subject, detail, alert,
   cors: ORIGINS.includes(origin) ? origin : ORIGINS[0],

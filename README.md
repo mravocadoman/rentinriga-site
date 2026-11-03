@@ -12,6 +12,27 @@ rentinrigalatvia.lv rebuilt from WordPress (Divi) as a lead-generation site: peo
 - `n8n/lead-workflow.js`: source of the live n8n workflow, kept here so the form and the workflow change together
 - `docs/plan.md`: the rebuild plan and open owner decisions
 
+## Generated pages (`tools/build.py`)
+
+`data/areas.json` is the single source for area facts, rents and the Riga averages (with `ru` texts per area). After editing it, or `index.html` / `privacy/index.html`, run:
+
+```bash
+python3 tools/build.py
+```
+
+It writes and you commit:
+- `assets/areas.js`, the data the browser uses (`window.RR_DATA`);
+- `areas/` (an index plus 11 guides);
+- `riga-rent-prices/`;
+- `sitemap.xml`;
+- `ru/` and `ru/privacy/`.
+
+The deploy does not run the build.
+
+The Russian pages are translations of the English ones through `data/i18n/ru-index.json` and `ru-privacy.json`, exact text to translation. The build **fails and lists any English text with no translation**, so a copy change in English can't silently ship half-translated. `main.js` keeps its own strings in the `T` table (EN and RU), picked by `<html lang>`. Form values stay English in both languages, so lead e-mails are uniform; each lead carries `lang`, and Russian leads are marked `[RU]` in Telegram and `[ru]` in the table's source column.
+
+Links can prefill the form: `/?area=teika&rooms=2&budget=700#request` (area ids are the ids in `data/areas.json`).
+
 ## Run locally
 
 ```bash
@@ -25,7 +46,7 @@ Port 4173 matters: the n8n workflow only echoes CORS for `localhost:4173`, `127.
 Every figure on the site comes from a dated source:
 
 - Area rents (`AREAS` in `main.js`): viszinis.lv average asking rent per neighbourhood, 1 Mar – 31 Oct 2026, by Latvian room count.
-- City-wide fallback (`CITY`): vericity.ai median of about 2,175 listings, 2 Nov 2026.
+- Vericity.ai median (`city_median`, about 2,175 listings, 2 Nov 2026) is quoted only on the rent-prices page, as a second source. Everything else, including the budget hint's Riga figure, uses the viszinis.lv averages.
 - City-wide averages for the "vs Riga average" badges and the matcher's "Lowest rent" (`CITY_AVG`): viszinis.lv, same dataset and period as the area rents.
 - Matcher (`TAGS`, `WORK` in `main.js`): area tags mirror the area card copy, and commute is the straight-line distance to the chosen work district. The score weighs budget fit 45%, distance 30% and priorities 25%.
 - Heating (`HEAT`): scaled from Rīgas siltums' 45 m² example (insulated €46–57, not insulated €116–142 a month in Dec–Jan, excl. VAT).

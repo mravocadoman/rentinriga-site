@@ -336,10 +336,84 @@ def prices_page():
 
 
 def sitemap():
-    urls = ['', 'riga-rent-prices/', 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/']
+    urls = ['', 'ru/', 'riga-rent-prices/', 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/', 'ru/privacy/']
     today = date.today().isoformat()
     body = ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls)
     (ROOT / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n', encoding='utf-8')
+
+
+def translate(src, table, what):
+    """Swaps visible text and translatable attributes through table (exact, whitespace-normalised).
+    Scripts, styles and form values are left alone. Fails on any untranslated text."""
+    import re
+    from html import unescape
+    missing = []
+
+    def tr(text):
+        key = ' '.join(unescape(text).split())
+        if not key or not any(c.isalpha() for c in key):
+            return None
+        if key not in table:
+            missing.append(key)
+            return None
+        return table[key]
+
+    def text_node(m):
+        raw = m.group(1)
+        t = tr(raw)
+        if t is None:
+            return m.group(0)
+        lead, trail = raw[:len(raw) - len(raw.lstrip())], raw[len(raw.rstrip()):]
+        return '>' + lead + escape(t, quote=False) + trail + '<'
+
+    def attr(m):
+        t = tr(m.group(2))
+        return m.group(0) if t is None else f'{m.group(1)}="{escape(t)}"'
+
+    out = []
+    # SVG stays in: it has no text, and cutting it out would split the labels next to icons.
+    for part in re.split(r'(<script\b.*?</script>|<style\b.*?</style>)', src, flags=re.S):
+        if part.startswith(('<script', '<style')):
+            out.append(part)
+            continue
+        part = re.sub(r'>([^<]+)<', text_node, part)
+        part = re.sub(r'\b(alt|placeholder|aria-label|title)="([^"]*)"', attr, part)
+        part = re.sub(r'(<meta (?:name|property)="(?:description|og:title|og:description|og:image:alt)" content)="([^"]*)"', attr, part)
+        out.append(part)
+    if missing:
+        raise SystemExit(f'{what}: {len(missing)} untranslated string(s):\n  ' + '\n  '.join(dict.fromkeys(missing)))
+    return ''.join(out)
+
+
+def russian():
+    table = json.loads((ROOT / 'data/i18n/ru-index.json').read_text(encoding='utf-8'))
+    s = translate((ROOT / 'index.html').read_text(encoding='utf-8'), table, 'ru/index.html')
+    for a, b in [
+        ('<html lang="en">', '<html lang="ru">'),
+        ('<link rel="canonical" href="https://rentinrigalatvia.lv/">', '<link rel="canonical" href="https://rentinrigalatvia.lv/ru/">'),
+        ('<meta property="og:url" content="https://rentinrigalatvia.lv/">', '<meta property="og:url" content="https://rentinrigalatvia.lv/ru/">\n  <meta property="og:locale" content="ru_RU">'),
+        ('<a class="lang-switch" href="/ru/" hreflang="ru" lang="ru">RU</a>', '<a class="lang-switch" href="/" hreflang="en" lang="en">EN</a>'),
+        ('href="/privacy/"', 'href="/ru/privacy/"'),
+        ('<a class="logo" href="/"', '<a class="logo" href="/ru/"'),
+    ]:
+        assert a in s, a
+        s = s.replace(a, b)
+    (ROOT / 'ru').mkdir(exist_ok=True)
+    (ROOT / 'ru/index.html').write_text(s, encoding='utf-8')
+
+    table = json.loads((ROOT / 'data/i18n/ru-privacy.json').read_text(encoding='utf-8'))
+    s = translate((ROOT / 'privacy/index.html').read_text(encoding='utf-8'), table, 'ru/privacy/index.html')
+    for a, b in [
+        ('<html lang="en">', '<html lang="ru">'),
+        ('<link rel="canonical" href="https://rentinrigalatvia.lv/privacy/">', '<link rel="canonical" href="https://rentinrigalatvia.lv/ru/privacy/">'),
+        ('<a class="logo" href="/"', '<a class="logo" href="/ru/"'),
+        ('href="/#request"', 'href="/ru/#request"'),
+        ('<a href="/">', '<a href="/ru/">'),
+    ]:
+        assert a in s, a
+        s = s.replace(a, b)
+    (ROOT / 'ru/privacy').mkdir(parents=True, exist_ok=True)
+    (ROOT / 'ru/privacy/index.html').write_text(s, encoding='utf-8')
 
 
 if __name__ == '__main__':
@@ -354,5 +428,6 @@ if __name__ == '__main__':
         area_page(a)
     areas_index()
     prices_page()
+    russian()
     sitemap()
     print(f'built {len(AREAS)} area guides, areas index, rent prices page, sitemap, assets/areas.js')

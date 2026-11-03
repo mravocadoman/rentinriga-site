@@ -394,3 +394,5 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 .lead-sample dt { color: var(--ink-2); font-weight: 600; }
 .lead-sample dd { margin: 0; font-weight: 600; }
 .lead-sample p:last-child { margin: 0; }
+.nav-links .lang-switch { font-weight: 800; color: var(--ink); border: 1.5px solid var(--line); border-radius: 8px; padding: 4px 8px; }
+@media (max-width: 920px) { .nav-links .lang-switch { display: inline-block; border: 0; padding: 12px 0; } }
