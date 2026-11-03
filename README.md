@@ -24,6 +24,7 @@ It writes and you commit:
 - `assets/areas.js`, the data the browser uses (`window.RR_DATA`);
 - `areas/` (an index plus 11 guides);
 - `riga-rent-prices/`;
+- `how-to-rent-in-riga/`, whose Latvian listing terms went through the latvian-writing review pass with no findings;
 - `sitemap.xml`;
 - `ru/` and `ru/privacy/`.
 
@@ -89,4 +90,4 @@ The repo secrets are `SG_SSH_KEY`, `SG_HOST` (`ssh.rentinrigalatvia.lv`) and `SG
 
 ## Search Console
 
-URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day; it reads Success, with 18 pages discovered. Indexing was requested for `/`, `/riga-rent-prices/` and `/ru/`. The build regenerates `sitemap.xml`; a page added outside the build has to be added to `urls` in `tools/build.py`.
+URL-prefix property `https://rentinrigalatvia.lv/` under rihards.zeila@gmail.com, added and verified 2026-11-03 with `googlec3673720e3b0e240.html`. It's the same per-account file Impromotion uses. It is in the repo and the deploy list. **Never delete it**, or the property loses verification. `sitemap.xml` was submitted the same day; it reads Success, with 18 pages discovered. Indexing was requested for `/`, `/riga-rent-prices/`, `/ru/` and `/how-to-rent-in-riga/`. The build regenerates `sitemap.xml`; a page added outside the build has to be added to `urls` in `tools/build.py`.
