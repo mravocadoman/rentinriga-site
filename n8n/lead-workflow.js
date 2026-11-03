@@ -91,6 +91,9 @@ if (kind === 'tenant') {
   alert = '🤝 New partner application' + NL + (company || '-') + ' | ' + name + NL + [phone, email].filter(Boolean).join(' | ');
 }
 
+// Telegram gets parse_mode HTML, so user text is escaped (Markdown would eat [RU] or choke on _ and *).
+alert = alert.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 const origin = (inp.headers || {}).origin || '';
 return [{ json: {
   row: {
@@ -215,7 +218,7 @@ const ping = node({
       operation: 'sendMessage',
       chatId: '6091120403',
       text: expr("{{ $('Parse and gate').item.json.alert }}"),
-      additionalFields: { appendAttribution: false, disable_web_page_preview: true },
+      additionalFields: { appendAttribution: false, disable_web_page_preview: true, parse_mode: 'HTML' },
     },
     credentials: { telegramApi: { id: 'Q8gMn5hYpVdgOH6K', name: 'Telegram account' } },
   },
