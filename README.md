@@ -1,4 +1,6 @@
-# Rent in Riga Latvia
+# Riga Flat Match (rentinrigalatvia.lv)
+
+The site was called "Rent in Riga" until 2026-11-04. It was renamed because an older agency, Rent In Riga (rentinriga.lv, since 2005), uses that name. The domain, the repo and the n8n workflow and table names keep the old name.
 
 rentinrigalatvia.lv rebuilt from WordPress (Divi) as a lead-generation site: people relocating to Riga send one rental request, and we pass it to up to three partner agencies. Static HTML/CSS/JS, English only, no build step. The font (Plus Jakarta Sans, OFL) is self-hosted in `assets/fonts/` (latin + latin-ext, which Latvian letters need). Leaflet loads from cdnjs only when the map scrolls near.
 

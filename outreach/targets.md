@@ -38,13 +38,8 @@ These firms don't own rental stock; they search on behalf of companies relocatin
 ## Not contacting
 
 - **VIP Real** (vipreal.lv): rentals mostly in Jūrmala and Dubai, not Riga.
-- **Rent In Riga** (rentinriga.lv, since 2005): **a name clash, see below.**
+- **Rent In Riga** (rentinriga.lv, since 2005): contact last; see the note below.
 
-## ⚠️ Decide first: the "Rent In Riga" name clash
+## Name clash: resolved
 
-An agency called **Rent In Riga** has been operating since 2005 at **rentinriga.lv** (info@rentinriga.com), renting apartments to foreigners. Our site calls itself "Rent in Riga" at rentinrigalatvia.lv. That's close enough to confuse tenants, partners and Google, and as the older business they may have rights to the name. Two options:
-
-1. **Rebrand our display name** (keep the domain), e.g. "Riga Flat Match". That's a change in the site files, the e-mails and the PDF.
-2. **Approach them first, as a partner.** The name overlap is awkward, and they might object.
-
-The safer default is option 1, before any outreach goes out under the current name.
+An agency called **Rent In Riga** has been operating since 2005 at rentinriga.lv. To avoid confusion, our site was renamed **Riga Flat Match** on 2026-11-04; the domain rentinrigalatvia.lv stays. They're a possible partner like any other Tier A agency, but contact them last, once the new name is established.

@@ -20,5 +20,5 @@ Would a 15-minute call this week or next work for you? I've attached a one-page 
 
 Best regards,
 Rihards Zeila
-Rent in Riga · rentinrigalatvia.lv
+Riga Flat Match · rentinrigalatvia.lv
 +371 26 673 384

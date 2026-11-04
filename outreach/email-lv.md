@@ -20,5 +20,5 @@ Ko sakāt? Ja ir interese, varam sarunāt 15 minūšu zvanu šonedēļ vai nāka
 
 Ar cieņu
 Rihards Zeila
-Rent in Riga · rentinrigalatvia.lv
+Riga Flat Match · rentinrigalatvia.lv
 +371 26 673 384

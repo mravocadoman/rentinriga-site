@@ -8,5 +8,5 @@ If it's not relevant right now, just tell me and I won't follow up again.
 
 Best regards,
 Rihards Zeila
-Rent in Riga · rentinrigalatvia.lv
+Riga Flat Match · rentinrigalatvia.lv
 +371 26 673 384

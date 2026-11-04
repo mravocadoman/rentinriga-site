@@ -70,7 +70,7 @@ const line = (k, v) => (v ? k + ': ' + v + NL : '');
 let subject, detail, alert;
 if (kind === 'tenant') {
   const what = [rooms && rooms + ' rooms', budget && 'up to EUR ' + budget, moveInLv && 'from ' + moveInLv, stay && stay + ' months'].filter(Boolean).join(', ');
-  subject = 'Rent in Riga request: ' + (what || 'flat') + ' | ' + name;
+  subject = 'Riga Flat Match request: ' + (what || 'flat') + ' | ' + name;
   // The block between the rules is safe to forward to a partner agency as-is (the lead consented to that).
   detail = '---- request (forwardable) ----' + NL +
     line('Language', langLine) + line('Name', name) + line('E-mail', email) + line('Phone / WhatsApp', phone) + line('Prefers', channel) +
@@ -84,7 +84,7 @@ if (kind === 'tenant') {
     (relocation === 'employer' ? NL + '💼 Employer-backed' + (company ? ': ' + company : '') : '') +
     NL + [phone, email].filter(Boolean).join(' | ') + (source ? NL + '🔗 ' + source : '');
 } else {
-  subject = 'Rent in Riga partner application: ' + (company || name);
+  subject = 'Riga Flat Match partner application: ' + (company || name);
   detail = line('Agency', company) + line('Website', website) + line('Contact', name) + line('E-mail', email) +
     line('Phone', phone) + line('Flats managed / listed', units) + line('Areas', areas) +
     (message ? NL + message + NL : '') + line('Source', source) + line('Page', page);
@@ -116,8 +116,8 @@ if (kind === 'tenant') {
       (RU ? 'Районы: ' : 'Areas: ') + (picked.length ? picked.join(', ') : (RU ? 'любые' : 'any')),
     ].filter(Boolean).join(NL);
     const text = RU
-      ? ['Здравствуйте!', '', 'Спасибо за заявку на Rent in Riga. Вот что мы получили:', '', facts, '', 'Что будет дальше', '1. Мы проверяем заявку, обычно в течение одного рабочего дня.', '2. До трёх агентств связываются с вами удобным для вас способом.', '3. Вы сравниваете квартиры, договариваетесь о просмотрах и выбираете. Без обязательств.', '', 'Совет: никогда не платите депозит или бронь, пока не увидели квартиру лично или по видеосвязи.', '', 'Что-то не так или планы изменились? Просто ответьте на это письмо.', '', 'Rent in Riga', 'https://rentinrigalatvia.lv/ru/'].join(NL)
-      : ['Hi,', '', 'Thanks for your request on Rent in Riga. This is what we received:', '', facts, '', 'What happens next', '1. We check your request, usually within one working day.', '2. Up to three rental agencies contact you by your preferred channel.', '3. You compare flats, book viewings and choose. There is no obligation.', '', 'A tip while you wait: never pay a deposit or reservation fee before you have seen the flat in person or on a live video call.', '', 'Something wrong, or plans changed? Just reply to this e-mail.', '', 'Rent in Riga', 'https://rentinrigalatvia.lv/'].join(NL);
+      ? ['Здравствуйте!', '', 'Спасибо за заявку на Riga Flat Match. Вот что мы получили:', '', facts, '', 'Что будет дальше', '1. Мы проверяем заявку, обычно в течение одного рабочего дня.', '2. До трёх агентств связываются с вами удобным для вас способом.', '3. Вы сравниваете квартиры, договариваетесь о просмотрах и выбираете. Без обязательств.', '', 'Совет: никогда не платите депозит или бронь, пока не увидели квартиру лично или по видеосвязи.', '', 'Что-то не так или планы изменились? Просто ответьте на это письмо.', '', 'Riga Flat Match', 'https://rentinrigalatvia.lv/ru/'].join(NL)
+      : ['Hi,', '', 'Thanks for your request on Riga Flat Match. This is what we received:', '', facts, '', 'What happens next', '1. We check your request, usually within one working day.', '2. Up to three rental agencies contact you by your preferred channel.', '3. You compare flats, book viewings and choose. There is no obligation.', '', 'A tip while you wait: never pay a deposit or reservation fee before you have seen the flat in person or on a live video call.', '', 'Something wrong, or plans changed? Just reply to this e-mail.', '', 'Riga Flat Match', 'https://rentinrigalatvia.lv/'].join(NL);
     confirm = { send: true, to: email, subject: RU ? 'Мы получили вашу заявку на квартиру в Риге' : 'We’ve got your Riga flat request', text };
   }
 }
@@ -232,7 +232,7 @@ const mail = node({
       subject: expr("{{ $('Parse and gate').item.json.subject }}"),
       emailType: 'text',
       message: expr("{{ $('Parse and gate').item.json.detail }}"),
-      options: { appendAttribution: false, senderName: 'Rent in Riga website', replyTo: expr("{{ $('Parse and gate').item.json.email }}") },
+      options: { appendAttribution: false, senderName: 'Riga Flat Match website', replyTo: expr("{{ $('Parse and gate').item.json.email }}") },
     },
     credentials: { gmailOAuth2: { id: 'OxLeeAoOPOzsUtpV', name: 'Rihards personal | Gmail account' } },
   },
@@ -283,7 +283,7 @@ const confirmMail = node({
       subject: expr("{{ $('Parse and gate').item.json.confirm.subject }}"),
       emailType: 'text',
       message: expr("{{ $('Parse and gate').item.json.confirm.text }}"),
-      options: { appendAttribution: false, senderName: 'Rent in Riga' },
+      options: { appendAttribution: false, senderName: 'Riga Flat Match' },
     },
     credentials: { gmailOAuth2: { id: 'OxLeeAoOPOzsUtpV', name: 'Rihards personal | Gmail account' } },
   },

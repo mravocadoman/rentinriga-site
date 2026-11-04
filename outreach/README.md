@@ -7,7 +7,7 @@ Everything needed to sign the first rental agencies. Nothing in this folder is d
 | `targets.md` | Riga rental agencies to contact, with contacts from their own websites, and a status column to track replies |
 | `email-en.md`, `email-lv.md` | First e-mail. Use Latvian for Latvian agencies, English for the rest. Replace `{first name}` / `{vārds}` and `{agency}` / `{aģentūra}`. |
 | `followup-en.md`, `followup-lv.md` | One follow-up after 4–5 working days with no reply. Then stop. |
-| `rent-in-riga-partner-offer.pdf` | One-page offer to attach. The source is `partner-offer.html`; re-render with Chrome's "print to PDF" (A4, no margins) after editing. |
+| `riga-flat-match-partner-offer.pdf` | One-page offer to attach. The source is `partner-offer.html`; re-render with Chrome's "print to PDF" (A4, no margins) after editing. |
 | `partner-agreement.md` | Short agreement for agencies that say yes. **It's a draft: have it checked and decide which entity signs before the first signature.** |
 
 ## Offer in one line

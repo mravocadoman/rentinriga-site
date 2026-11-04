@@ -1,22 +1,22 @@
 # Lead Partnership Agreement
 
-> **Draft for discussion, not legal advice.** Have it checked before the first signature, and decide which legal entity signs for Rent in Riga (you personally, or a company). Fill in everything in [brackets].
+> **Draft for discussion, not legal advice.** Have it checked before the first signature, and decide which legal entity signs for Riga Flat Match (you personally, or a company). Fill in everything in [brackets].
 
 **Between**
 
-[Name or company], registration no. [ ], address [ ], operating rentinrigalatvia.lv ("**Rent in Riga**"),
+[Name or company], registration no. [ ], address [ ], operating rentinrigalatvia.lv ("**Riga Flat Match**"),
 
 and
 
 [Agency name], registration no. [ ], address [ ] ("**Partner**").
 
-## 1. What Rent in Riga does
+## 1. What Riga Flat Match does
 
-1.1 Rent in Riga sends Partner rental requests from people looking for a home in Riga ("**Leads**") that fit the areas and price range Partner covers. Leads arrive by e-mail.
+1.1 Riga Flat Match sends Partner rental requests from people looking for a home in Riga ("**Leads**") that fit the areas and price range Partner covers. Leads arrive by e-mail.
 
 1.2 Each Lead goes to no more than three agencies.
 
-1.3 Rent in Riga does not guarantee any number of Leads, and does not guarantee that a Lead results in a tenancy.
+1.3 Riga Flat Match does not guarantee any number of Leads, and does not guarantee that a Lead results in a tenancy.
 
 ## 2. Fees
 
@@ -24,7 +24,7 @@ and
 
 2.2 After that, each Lead costs **EUR 20** (plus VAT if applicable).
 
-2.3 Rent in Riga invoices monthly, listing the Leads sent that month. Invoices are payable within 14 days.
+2.3 Riga Flat Match invoices monthly, listing the Leads sent that month. Invoices are payable within 14 days.
 
 2.4 Partner may dispute a Lead within 7 days of receiving it if the contact details don't work, or if it duplicates a Lead sent to Partner in the previous 30 days. A justified dispute is not charged.
 
@@ -38,7 +38,7 @@ Partner agrees to:
 - state its commission and the expected utility costs before the viewing; and
 - use a written lease.
 
-If Partner repeatedly breaks these standards, Rent in Riga may stop sending Leads straight away.
+If Partner repeatedly breaks these standards, Riga Flat Match may stop sending Leads straight away.
 
 ## 4. Personal data
 
@@ -51,13 +51,13 @@ If Partner repeatedly breaks these standards, Rent in Riga may stop sending Lead
 - not add the tenant to marketing lists, and not pass the data to anyone else; and
 - delete the data within 60 days if no tenancy results, unless the law requires Partner to keep it.
 
-4.4 If a tenant withdraws consent and Rent in Riga tells Partner, Partner stops contacting them.
+4.4 If a tenant withdraws consent and Riga Flat Match tells Partner, Partner stops contacting them.
 
 ## 5. Independence
 
 5.1 Partner sets its own commission and lease terms.
 
-5.2 Rent in Riga is not a party to any tenancy and is not responsible for the flats, the leases or the agencies' services.
+5.2 Riga Flat Match is not a party to any tenancy and is not responsible for the flats, the leases or the agencies' services.
 
 5.3 Partner is not responsible for the website rentinrigalatvia.lv.
 
@@ -79,7 +79,7 @@ Latvian law applies. Disputes go to the courts of the Republic of Latvia.
 
 ---
 
-| Rent in Riga | Partner |
+| Riga Flat Match | Partner |
 |---|---|
 | Name: | Name: |
 | Signature: | Signature: |

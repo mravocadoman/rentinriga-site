@@ -8,5 +8,5 @@ Ja šobrīd nav aktuāli, droši pasakiet, un vairs netraucēšu.
 
 Ar cieņu
 Rihards Zeila
-Rent in Riga · rentinrigalatvia.lv
+Riga Flat Match · rentinrigalatvia.lv
 +371 26 673 384

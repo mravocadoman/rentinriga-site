@@ -60,7 +60,7 @@ def page(path, title, description, body, extra_head=''):
   <meta property="og:title" content="{escape(title)}">
   <meta property="og:description" content="{escape(description)}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{SITE}/assets/img/og.jpg">
+  <meta property="og:image" content="{SITE}/assets/img/share.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -73,9 +73,9 @@ def page(path, title, description, body, extra_head=''):
 <body>
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main">
-      <a class="logo" href="/" aria-label="Rent in Riga, home">
+      <a class="logo" href="/" aria-label="Riga Flat Match, home">
         {LOGO}
-        Rent in Riga
+        Riga Flat Match
       </a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -108,7 +108,7 @@ def page(path, title, description, body, extra_head=''):
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a class="logo" href="/">{LOGO.replace('30', '28')} Rent in Riga</a>
+          <a class="logo" href="/">{LOGO.replace('30', '28')} Riga Flat Match</a>
           <p>Free flat-matching for people relocating to Riga, Latvia. We connect tenants with rental agencies. We don’t own or list flats ourselves.</p>
         </div>
         <div>
@@ -130,7 +130,7 @@ def page(path, title, description, body, extra_head=''):
           </ul>
         </div>
       </div>
-      <p class="small">© <span data-year>{date.today().year}</span> Rent in Riga Latvia</p>
+      <p class="small">© <span data-year>{date.today().year}</span> Riga Flat Match</p>
     </div>
   </footer>
   <script src="/main.js" defer></script>
@@ -177,7 +177,7 @@ def area_page(a):
     title = f'Renting a flat in {a["name"]}, Riga (2026): rents and area guide'
     desc = f'{a["tagline"]} Average asking rent for a 2-room flat in {a["name"]}: {eur(r2)} a month (Mar–Oct 2026). Get offers from rental agencies for free.'
     crumbs = ld({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'Rent in Riga', 'item': SITE + '/'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'Riga Flat Match', 'item': SITE + '/'},
         {'@type': 'ListItem', 'position': 2, 'name': 'Neighbourhoods', 'item': SITE + '/areas/'},
         {'@type': 'ListItem', 'position': 3, 'name': a['name'], 'item': f'{SITE}/areas/{a["id"]}/'}]})
     body = f'''    <section class="hero guide-hero">
@@ -259,7 +259,7 @@ def areas_index():
       </div>
     </section>
 '''
-    page('areas', 'Riga neighbourhood guides for renters (2026) | Rent in Riga',
+    page('areas', 'Riga neighbourhood guides for renters (2026) | Riga Flat Match',
          'Where to live in Riga: 11 neighbourhoods compared, with average asking rents for 2026, transport and what each area is like.', body)
 
 
@@ -334,7 +334,7 @@ def prices_page():
       </div>
     </section>
 '''
-    page('riga-rent-prices', 'Rent prices in Riga 2026: average rent by neighbourhood | Rent in Riga',
+    page('riga-rent-prices', 'Rent prices in Riga 2026: average rent by neighbourhood | Riga Flat Match',
          f'Average rent in Riga in 2026: {eur(avg[0])} for a studio, {eur(avg[1])} for a 1-bedroom (2-room) flat and {eur(avg[2])} for 2 bedrooms. Compare 11 neighbourhoods.',
          body, faq_ld)
 
@@ -366,8 +366,8 @@ def how_to_rent():
     article = ld({'@context': 'https://schema.org', '@type': 'Article',
                   'headline': 'How to rent a flat in Riga as a foreigner (2026)',
                   'datePublished': DATA['updated'], 'dateModified': DATA['updated'], 'inLanguage': 'en',
-                  'author': {'@type': 'Organization', 'name': 'Rent in Riga Latvia', 'url': SITE + '/'},
-                  'publisher': {'@type': 'Organization', 'name': 'Rent in Riga Latvia', 'url': SITE + '/'},
+                  'author': {'@type': 'Organization', 'name': 'Riga Flat Match', 'url': SITE + '/'},
+                  'publisher': {'@type': 'Organization', 'name': 'Riga Flat Match', 'url': SITE + '/'},
                   'mainEntityOfPage': f'{SITE}/how-to-rent-in-riga/'})
     body = f"""    <section class="hero guide-hero">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -425,7 +425,7 @@ def how_to_rent():
       </article>
     </section>
 """
-    page('how-to-rent-in-riga', 'How to rent a flat in Riga as a foreigner (2026 guide) | Rent in Riga',
+    page('how-to-rent-in-riga', 'How to rent a flat in Riga as a foreigner (2026 guide) | Riga Flat Match',
          f'Renting in Riga step by step: average rents ({eur(avg[1])} for a 1-bedroom), deposit and agency fees, Latvian listing words, avoiding scams, the lease and registering your address.',
          body, article)
 
