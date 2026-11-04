@@ -407,3 +407,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 @media (max-width: 560px) { .glossary { grid-template-columns: 1fr; gap: 2px; } .glossary dd { margin-bottom: 10px; } }
 .how-cta { margin-top: 2.4em; padding: 28px; border-radius: 20px; background: var(--primary-soft); }
 .how-cta h2 { margin-top: 0; }
+
+/* ---------- Logo lockup ---------- */
+.logo-mark { display: block; flex: none; }
+.logo .accent { color: var(--primary); }
+.site-footer .logo .accent { color: #8fb0ff; }

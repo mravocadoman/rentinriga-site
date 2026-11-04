@@ -20,7 +20,8 @@ ROOMS = ['1-room (studio)', '2-room (1 bed)', '3-room (2 beds)', '4+ room (3+ be
 MAX_RENT = [max(a['rent'][i] or 0 for a in AREAS) for i in range(4)]
 OLD_TOWN = (56.9472, 24.1067)  # Town Hall Square
 ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
-LOGO = '<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#1f5eff"/><path d="M8 24V14l8-6 8 6v10h-5.5v-6h-5v6z" fill="#fff"/></svg>'
+LOGO = '<img class="logo-mark" src="/assets/brand/mark.svg" width="34" height="34" alt="">'
+LOGO_DARK = '<img class="logo-mark" src="/assets/brand/mark-on-dark.svg" width="32" height="32" alt="">'
 
 
 def eur(n):
@@ -75,7 +76,7 @@ def page(path, title, description, body, extra_head=''):
     <nav class="nav wrap" aria-label="Main">
       <a class="logo" href="/" aria-label="Riga Flat Match, home">
         {LOGO}
-        Riga Flat Match
+        <span>Riga Flat <span class="accent">Match</span></span>
       </a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -108,7 +109,7 @@ def page(path, title, description, body, extra_head=''):
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a class="logo" href="/">{LOGO.replace('30', '28')} Riga Flat Match</a>
+          <a class="logo" href="/">{LOGO_DARK} <span>Riga Flat <span class="accent">Match</span></span></a>
           <p>Free flat-matching for people relocating to Riga, Latvia. We connect tenants with rental agencies. We don’t own or list flats ourselves.</p>
         </div>
         <div>

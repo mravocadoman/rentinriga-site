@@ -43,9 +43,10 @@
   "dvi.gov.lv": "dvi.gov.lv",
   "Home": "Главная",
   "For rental agencies": "Для агентств (англ.)",
-  "Riga Flat Match": "Riga Flat Match",
   "To reply to you and handle your request or application,": "Чтобы ответить вам и обработать заявку,",
   "including one automatic e-mail confirming a rental request. The legal basis is taking steps at your request (Art. 6(1)(b)).": "включая одно автоматическое письмо с подтверждением заявки на аренду. Основание — действия по вашему запросу (ст. 6(1)(b)).",
   "Visit statistics:": "Статистика посещений:",
-  "we use Cloudflare Web Analytics to count page views. It sets no cookies and doesn’t follow individual visitors across sites; Cloudflare receives your IP address, the page and the referring website when the page loads. The legal basis is our legitimate interest in knowing which pages people use (Art. 6(1)(f)).": "мы считаем просмотры страниц с помощью Cloudflare Web Analytics. Сервис не ставит cookies и не отслеживает отдельных посетителей на других сайтах; при загрузке страницы Cloudflare получает ваш IP-адрес, адрес страницы и сайт, с которого вы перешли. Основание — наш законный интерес знать, какими страницами пользуются (ст. 6(1)(f))."
+  "we use Cloudflare Web Analytics to count page views. It sets no cookies and doesn’t follow individual visitors across sites; Cloudflare receives your IP address, the page and the referring website when the page loads. The legal basis is our legitimate interest in knowing which pages people use (Art. 6(1)(f)).": "мы считаем просмотры страниц с помощью Cloudflare Web Analytics. Сервис не ставит cookies и не отслеживает отдельных посетителей на других сайтах; при загрузке страницы Cloudflare получает ваш IP-адрес, адрес страницы и сайт, с которого вы перешли. Основание — наш законный интерес знать, какими страницами пользуются (ст. 6(1)(f)).",
+  "Riga Flat": "Riga Flat",
+  "Match": "Match"
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Riga Flat Match">
+  <defs>
+    <mask id="seam" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+      <path d="M24 5 L6.5 19.6 Q5.5 20.4 5.5 21.8 V39.5 Q5.5 42.5 8.5 42.5 H39.5 Q42.5 42.5 42.5 39.5 V21.8 Q42.5 20.4 41.5 19.6 L24 5 Z" fill="#fff" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M24 1 V22.4 H25.6 A3.7 3.7 0 1 1 25.6 28.2 H24 V47" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <g mask="url(#seam)">
+    <rect width="48" height="48" fill="#FFFFFF"/>
+    <path d="M0 0 H24 V22.4 H25.6 A3.7 3.7 0 1 1 25.6 28.2 H24 V48 H0 Z" fill="#1F5EFF"/>
+  </g>
+</svg>
