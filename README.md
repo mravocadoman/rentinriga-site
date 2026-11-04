@@ -100,3 +100,9 @@ Cloudflare Web Analytics, which is cookieless and needs no consent banner, runs 
 - The beacon snippet (site token `a43d3f88…`, public by design) sits before `</body>` in every hand-written page and in the `page()` template in `tools/build.py`, so the generated and Russian pages carry it too.
 - A new hand-written page needs the snippet added by hand.
 - Lead sources are recorded separately on each lead (UTM, gclid, referrer).
+
+## Brand
+
+- **Logo:** `assets/brand/mark.svg` (light backgrounds) and `mark-on-dark.svg` (dark backgrounds). It's a house made of two matching halves joined by a single puzzle tab, drawn as SVG from a gpt-image-2 concept; the concepts are in `docs/brand/`.
+- **Wordmark:** "Riga Flat **Match**", with "Match" in brand blue (`.logo .accent`).
+- **Derived from the mark:** `favicon.svg` is a copy of `mark.svg`. `apple-touch-icon.png` is the dark mark on a navy tile. The share image (`assets/img/share.jpg`) and the partner PDF use the same lockup.
