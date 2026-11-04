@@ -32,6 +32,16 @@ It writes and you commit:
 
 The deploy does not run the build.
 
+### Guides (`tools/guides.py`, called by the build)
+
+`/guides/` holds four data articles aimed at searches with real volume (Keyword Planner, Nov 2026): cost of living in Riga, average salary in Latvia (with a take-home pay calculator), moving to Latvia, and student housing. Every figure sits at the top of `tools/guides.py` with its source in `SRC`; the text, charts, FAQ schema and infographics all read from there, and rents come from `data/areas.json`. **Refresh when CSP publishes new wages (Q3 is due in early December) and each January for tax and fares.** The take-home formula is shared with the calculator in `main.js`; `python3 tools/guides.py` checks it still lands within 1% of CSP's own average net wage.
+
+Charts are plain HTML from `tools/charts.py` (`hbar`, `segbar`, `stats`), each with a "Show the numbers" table. Infographics (1080×1350 PNG, with embed code on each article) are rendered from `docs/infographics/*.html` with Chrome:
+
+```bash
+python3 tools/build.py && python3 tools/guides.py --render
+```
+
 The Russian pages are translations of the English ones through `data/i18n/ru-index.json` and `ru-privacy.json`, exact text to translation. The build **fails and lists any English text with no translation**, so a copy change in English can't silently ship half-translated. `main.js` keeps its own strings in the `T` table (EN and RU), picked by `<html lang>`. Form values stay English in both languages, so lead e-mails are uniform; each lead carries `lang`, and Russian leads are marked `[RU]` in Telegram and `[ru]` in the table's source column.
 
 Links can prefill the form: `/?area=teika&rooms=2&budget=700#request` (area ids are the ids in `data/areas.json`).

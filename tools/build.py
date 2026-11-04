@@ -118,7 +118,8 @@ def page(path, title, description, body, extra_head=''):
             <li><a href="/areas/">Riga neighbourhoods</a></li>
             <li><a href="/how-to-rent-in-riga/">How to rent in Riga</a></li>
             <li><a href="/riga-rent-prices/">Rent prices in Riga</a></li>
-            <li><a href="/#costs">Move-in cost calculator</a></li>
+            <li><a href="/guides/cost-of-living-in-riga/">Cost of living in Riga</a></li>
+            <li><a href="/guides/">All guides</a></li>
           </ul>
         </div>
         <div>
@@ -340,8 +341,8 @@ def prices_page():
          body, faq_ld)
 
 
-def sitemap():
-    urls = ['', 'ru/', 'how-to-rent-in-riga/', 'riga-rent-prices/', 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/', 'ru/privacy/']
+def sitemap(guides=()):
+    urls = ['', 'ru/', 'how-to-rent-in-riga/', 'riga-rent-prices/', 'guides/', *guides, 'areas/'] + [f'areas/{a["id"]}/' for a in AREAS] + ['partners/', 'privacy/', 'ru/privacy/']
     today = date.today().isoformat()
     body = ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls)
     (ROOT / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n', encoding='utf-8')
@@ -518,6 +519,8 @@ if __name__ == '__main__':
     areas_index()
     prices_page()
     how_to_rent()
+    import guides
+    built = guides.build()
     russian()
-    sitemap()
-    print(f'built {len(AREAS)} area guides, areas index, rent prices page, sitemap, assets/areas.js')
+    sitemap(built)
+    print(f'built {len(AREAS)} area guides, areas index, rent prices page, {len(built)} articles, sitemap, assets/areas.js')

@@ -102,6 +102,26 @@
     });
   }
 
+  /* ---------- Guides: embed-code copy, take-home pay calculator ---------- */
+  document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+    const box = b.parentElement.querySelector('textarea');
+    try { await navigator.clipboard.writeText(box.value); } catch { box.select(); document.execCommand('copy'); }
+    b.textContent = 'Copied';
+  }));
+  const netcalc = $('#netcalc');
+  if (netcalc) {
+    // 2026 rules, same as net() in tools/guides.py: 10.5% social tax, €550 tax-free + €250 per dependant, 25.5% income tax.
+    const eur = (n) => '€' + Math.round(n).toLocaleString('en-GB');
+    const run = () => {
+      const g = Math.max(+netcalc.gross.value || 0, 0), dep = +netcalc.dep.value;
+      const si = g * 0.105, pit = Math.max(g - si - 550 - 250 * dep, 0) * 0.255;
+      const out = { net: g - si - pit, si, pit, employer: g * 1.2359 };
+      for (const k in out) $(`[data-out="${k}"]`, netcalc).textContent = eur(out[k]);
+    };
+    netcalc.addEventListener('input', run);
+    run();
+  }
+
   const wizard = $('#wizard');
   if (!wizard) return; // the rest is the homepage only
 

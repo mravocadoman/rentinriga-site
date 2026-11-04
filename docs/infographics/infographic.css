@@ -1,0 +1,25 @@
+/* Infographic canvas: 1080×1350, rendered to PNG by tools/guides.py --render */
+html, body.ig { margin: 0; width: 1080px; height: 1350px; overflow: hidden; background: #fff; }
+.ig main { box-sizing: border-box; height: 1350px; padding: 72px 80px 64px; display: flex; flex-direction: column;
+  background: radial-gradient(900px 500px at 100% 0, #eaf0ff, transparent 70%), #fff; }
+.ig header { display: flex; align-items: center; gap: 16px; font: 800 30px var(--font); color: var(--navy); }
+.ig header b { color: var(--primary); }
+.ig h1 { font: 800 72px/1.05 var(--font); letter-spacing: -.03em; color: var(--navy); margin: 56px 0 40px; max-width: 16ch; }
+.ig-body { flex: 1; font-size: 26px; }
+.ig .chart-card { border: 0; padding: 0; margin: 0; background: transparent; }
+.ig .chart-card figcaption b { font-size: 30px; } .ig .chart-card figcaption span { font-size: 22px; }
+.ig .chart-table { display: none; }
+.ig .hbars { gap: 14px; } .ig .hbars li { font-size: 25px; grid-template-columns: 34% 1fr; }
+.ig .hb-t { height: 40px; } .ig .hb-t i { height: 28px; } .ig .hb-t b { font-size: 24px; }
+.ig .seg-legend { font-size: 22px; } .ig .seg-legend i { width: 18px; height: 18px; }
+.ig .segbar { height: 72px; } .ig .seg { font-size: 24px; padding-left: 14px; }
+.ig .stats { margin: 0 0 48px; border: 0; padding: 0; grid-template-columns: 1fr 1fr; }
+.ig .stats strong { font-size: 76px; color: var(--primary); } .ig .stats span { font-size: 24px; }
+.ig .checklist > li { padding-bottom: 34px; padding-left: 4.2rem; margin-left: 1.6rem; border-left-width: 3px; }
+.ig .checklist > li::before { width: 3.2rem; height: 3.2rem; left: -1.6rem; top: -10px; font-size: 26px; }
+.ig .checklist h3 { font-size: 32px; font-weight: 700; color: var(--navy); }
+.ig footer { border-top: 2px solid var(--line); padding-top: 24px; font-size: 20px; color: var(--ink-2); }
+.ig footer p { margin: 0 0 6px; } .ig-url { font: 800 28px/1.4 var(--font) !important; color: var(--primary); }
+.ig .checklist > li { padding-bottom: 22px; } .ig .checklist h3 { margin: 0; } .ig .checklist p { margin: 2px 0 0; font-size: 22px; color: var(--ink-2); }
+.ig .student-housing .hbars li { grid-template-columns: 44% 1fr; }
+.ig .chart-card + .chart-card { margin-top: 44px; } .ig .hbars li { grid-template-columns: 40% 1fr; }
