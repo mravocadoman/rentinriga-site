@@ -435,7 +435,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 .chart-table td:not(:first-child), .chart-table th:not(:first-child) { text-align: right; }
 .guide-stats { margin-top: 1.4em; }
 .infographic { margin: 2em 0; }
-.infographic img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+.infographic img { width: 100%; height: auto; max-width: 440px; margin: 0 auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+.infographic figcaption { max-width: 440px; margin: 12px auto 0; }
 .embed-code textarea { min-height: 84px; font: 500 12px/1.4 ui-monospace, monospace; }
 .article-meta { color: var(--ink-2); font-size: .9rem; margin-top: -4px; }
 .toc { background: var(--surface); border-radius: var(--radius); padding: 16px 20px; margin: 1.4em 0; }
